@@ -1,0 +1,147 @@
+@import '../../../styles/index.scss';
+
+@mixin height {
+  height: 300px;
+
+  @media (min-width: 300px) and (max-width: 1220px) {
+    height: 200px;
+  }
+}
+
+.container {
+  @include height;
+  @include mainMarginTop;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  background-color: $lightPurple;
+}
+
+.sale {
+  background-color: $darkPurple;
+  height: 100%;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  @media (min-width: 701px) and (max-width: 1220px) {
+    width: 80px;
+  }
+
+  @media (min-width: 280px) and (max-width: 700px) {
+    width: 50px;
+  }
+
+  p {
+    color: white;
+    text-transform: uppercase;
+    font-family: $fontMontserrat;
+    font-size: 35px;
+    font-weight: $regular;
+    transform: rotate(270deg);
+
+    @media (min-width: 701px) and (max-width: 1220px) {
+      font-size: 25px;
+    }
+
+    @media (min-width: 280px) and (max-width: 700px) {
+      font-size: 20px;
+    }
+  }
+}
+
+.contentImgWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.contentWrap {
+  width: 60%;
+  height: 100%;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 701px) and (max-width: 899px) {
+    width: 70%;
+  }
+
+  @media (min-width: 441px) and (max-width: 700px) {
+    width: 100%;
+  }
+
+  @media (min-width: 280px) and (max-width: 440px) {
+    padding: 0 15px;
+    width: 100%;
+  }
+}
+
+.title {
+  font-family: $fontMontserrat;
+  font-weight: $regular;
+  font-size: 45px;
+  color: $darkPurple;
+
+  @media (min-width: 441px) and (max-width: 1220px) {
+    font-size: 30px;
+  }
+
+  @media (min-width: 280px) and (max-width: 440px) {
+    font-size: 20px;
+  }
+}
+
+.subtitle {
+  font-family: $fontMontserrat;
+  font-weight: $regular;
+  font-size: 20px;
+  margin-top: 20px;
+
+  @media (min-width: 441px) and (max-width: 1220px) {
+    font-size: 14px;
+  }
+
+  @media (min-width: 280px) and (max-width: 440px) {
+    font-size: 12px;
+  }
+}
+
+.endTime {
+  font-family: $fontMontserrat;
+  font-weight: $regular;
+  font-size: 20px;
+  color: $darkPurple;
+  margin-top: 25px;
+
+  @media (min-width: 441px) and (max-width: 1220px) {
+    font-size: 14px;
+  }
+
+  @media (min-width: 280px) and (max-width: 440px) {
+    font-size: 12px;
+  }
+}
+
+.imgWrap {
+  width: 40%;
+  @include height;
+  background-color: $lightPurple;
+  background-position: start;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @media (min-width: 441px) and (max-width: 899px) {
+    width: 30%;
+  }
+
+  @media (min-width: 280px) and (max-width: 700px) {
+    display: none;
+  }
+}

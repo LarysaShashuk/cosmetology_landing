@@ -1,10 +1,12 @@
+@import './responsive';
+
 // colors
-$darkPurple: #682C8F;
-$lightPurple: #EBE6ED;
-$grayBackground: #F4F3F3;
+$darkPurple: #682c8f;
+$lightPurple: #ebe6ed;
+$grayBackground: #f4f3f3;
 
 // fonts
-$fontNunito: 'Montserrat', sans-serif;
+$fontMontserrat: 'Montserrat', sans-serif;
 
 //font-weight
 $light: 300;
@@ -12,15 +14,65 @@ $regular: 400;
 $medium: 500;
 $semiBold: 600;
 
-
 //font-size
 $font_14px: 14px;
 $font_18px: 18px;
 $font_20px: 20px;
 $font_24px: 24px;
-$font_26px: 26px;  // delete it
+$font_26px: 26px; // delete it
 $font_35px: 35px;
 $font_40px: 40px;
 $font_45px: 45px;
 $font_48px: 48px;
 $font_55px: 55px;
+
+@mixin layout {
+  width: 86%;
+  margin: 0 auto;
+
+  @media (min-width: 280px) and (max-width: 740px) {
+    width: 90%;
+  }
+}
+
+@mixin heading {
+  font-family: $fontMontserrat;
+  font-size: 55px;
+  font-weight: $regular;
+
+  @media (min-width: 900px) and (max-width: 1200px) {
+    font-size: 40px;
+  }
+
+  @media (min-width: 441px) and (max-width: 899px) {
+    font-size: 35px;
+  }
+
+  @media (min-width: 280px) and (max-width: 440px) {
+    font-size: 25px;
+  }
+}
+
+@mixin mainMarginTop {
+  margin-top: 70px;
+
+  @media (min-width: 421px) and (max-width: 900px) {
+    margin-top: 50px;
+  }
+
+  @include mobile {
+    margin-top: 40px;
+  }
+}
+
+@mixin secondaryMarginTop {
+  margin-top: 50px;
+
+  @media (min-width: 421px) and (max-width: 900px) {
+    margin-top: 30px;
+  }
+
+  @include mobile {
+    margin-top: 40px;
+  }
+}
