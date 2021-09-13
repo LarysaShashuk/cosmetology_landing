@@ -1,9 +1,10 @@
 import React from 'react';
+import styles from './ProceduresGalleryPage.module.scss';
 
 export default function ProceduresGalleryPage(){
-    return <div>
+    return <div className={styles.container}> 
         <div>
-            test
+            
         </div>
     </div>
 }
