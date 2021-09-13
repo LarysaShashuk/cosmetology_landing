@@ -1,5 +1,9 @@
 import React from 'react';
 
 export default function ProceduresGalleryPage(){
-    return <div></div>
+    return <div>
+        <div>
+            test
+        </div>
+    </div>
 }
