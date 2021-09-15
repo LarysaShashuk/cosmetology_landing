@@ -1,18 +1,12 @@
 @import '../../../styles/index.scss';
 
 .container {
+  margin: 0 auto;
   @include mainMarginTop;
   width: 100%;
+  max-width: 1300px;
   height: 315px;
   position: relative;
-
-  @media (min-width: 2400px) {
-    height: 550px;
-  }
-
-  @media (min-width: 1670px) and (max-width: 2399px) {
-    height: 450px;
-  }
 
   @media (min-width: 786px) and (max-width: 1170px) {
     height: 225px;

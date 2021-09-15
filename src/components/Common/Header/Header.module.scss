@@ -16,6 +16,7 @@
 
   @media (min-width: 280px) and (max-width: 440px) {
     height: 150px;
+    margin-bottom: 20px;
   }
 }
 
@@ -75,6 +76,22 @@
 
 .phone {
   padding-left: 35px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-family: $fontMontserrat;
+  font-weight: $regular;
+  color: black;
+
+  @media (min-width: 740px) and (max-width: 1024px) {
+    font-size: 16px;
+  }
+
+  @media (min-width: 280px) and (max-width: 739px) {
+    font-size: 14px;
+  }
 
   @media (min-width: 280px) and (max-width: 1024px) {
     padding-left: 25px;

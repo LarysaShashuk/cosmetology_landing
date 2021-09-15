@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './WisheCard.module.scss';
-
+import Arrow from './ArrowSvg';
 export default function WisheCard(props) {
   const { title, path } = props;
 
@@ -8,7 +8,7 @@ export default function WisheCard(props) {
     <div className={styles.container}>
       <h3 className={styles.title}>{title}...</h3>
       <div href={path} className={styles.link}>
-        <img src='/assets/icons/arrow.svg' alt='arrow right' />
+        {Arrow}
       </div>
     </div>
   );

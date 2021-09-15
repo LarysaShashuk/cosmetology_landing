@@ -28,6 +28,7 @@ $font_55px: 55px;
 
 @mixin layout {
   width: 86%;
+  max-width: 1300px;
   margin: 0 auto;
 
   @media (min-width: 280px) and (max-width: 740px) {
@@ -74,5 +75,49 @@ $font_55px: 55px;
 
   @include mobile {
     margin-top: 40px;
+  }
+}
+
+@mixin secondaryMarginBottom {
+  margin-bottom: 50px;
+
+  @media (min-width: 421px) and (max-width: 900px) {
+    margin-bottom: 30px;
+  }
+
+  @include mobile {
+    margin-bottom: 40px;
+  }
+}
+
+@mixin textProcedurePage {
+  font-family: $fontMontserrat;
+  font-weight: $regular;
+  font-size: 20px;
+  line-height: 170%;
+
+  @media (min-width: 501px) and (max-width: 900px) {
+    font-size: 16px;
+  }
+
+  @media (min-width: 280px) and (max-width: 500px) {
+    font-size: 14px;
+  }
+}
+
+@mixin titleProcedurePage {
+  display: block;
+  font-family: $fontMontserrat;
+  font-weight: $regular;
+  font-size: 35px;
+  line-height: 170%;
+  margin-bottom: 15px;
+
+  @media (min-width: 501px) and (max-width: 900px) {
+    font-size: 30px;
+  }
+
+  @media (min-width: 280px) and (max-width: 500px) {
+    font-size: 20px;
   }
 }

@@ -91,6 +91,7 @@
   font-size: 20px;
   color: white;
   background: $darkPurple;
+  border: 1px solid $darkPurple;
   padding: 20px 35px;
   margin: 25px;
 
@@ -107,5 +108,10 @@
     font-size: 14px;
     padding: 10px 20px;
     margin: 15px;
+  }
+
+  &:hover {
+    color: $darkPurple;
+    background: transparent;
   }
 }

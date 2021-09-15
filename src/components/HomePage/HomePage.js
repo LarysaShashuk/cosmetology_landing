@@ -1,8 +1,9 @@
 import React from 'react';
 import SALE_INFORMATION from '../../data/SaleInformation';
 
-import PromotionBanner from '../Common/PromotionBanner/PromotionBanner';
+import Header from '../Common/Header/Header';
 import Introduction from './Introduction/Introduction';
+import PromotionBanner from '../Common/PromotionBanner/PromotionBanner';
 import Services from './Services/Services';
 import Wishes from './Wishes/Wishes';
 import CallToActionBanner from '../Common/CallToActionBanner/CallToActionBanner';
@@ -12,6 +13,7 @@ import Footer from '../Common/Footer/Footer';
 export default function HomeHage() {
   return (
     <>
+      <Header />
       <Introduction />
       <PromotionBanner
         title={SALE_INFORMATION.title}
@@ -21,7 +23,7 @@ export default function HomeHage() {
       />
       <Services />
       <Wishes />
-      <CallToActionBanner title='Записатися на прийом' />
+      <CallToActionBanner title="Записатися на прийом" />
       <Gallery />
       <Footer />
     </>

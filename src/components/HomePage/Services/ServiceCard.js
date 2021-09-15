@@ -1,5 +1,6 @@
 import React from 'react';
 import cx from 'classnames';
+import { Link } from 'react-router-dom';
 import styles from './ServiceCard.module.scss';
 
 export default function ServiceCard(props) {
@@ -14,12 +15,12 @@ export default function ServiceCard(props) {
         style={{ backgroundImage: `url(${img})` }}
       >
         <div className={styles.gradient}>
-          <a
+          <Link
             className={cx([styles.button, !isLeft && styles.right])}
-            href={`${path}`}
+            to={`/procedures_gallery/${path}`}
           >
             Переглянути всі
-          </a>
+          </Link>
         </div>
       </div>
     </div>

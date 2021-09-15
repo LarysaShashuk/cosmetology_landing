@@ -7,7 +7,7 @@ export default function CallToActionBanner(props) {
     <div className={styles.container}>
       <div
         className={styles.containerBackground}
-        style={{ backgroundImage: 'url(/assets/images/lavenders.png)' }}
+        style={{ backgroundImage: 'url(/assets/images/lavenders_long.jpg)' }}
       ></div>
       <div className={styles.titleWrap}>
         <h3 className={styles.title}>{title}</h3>

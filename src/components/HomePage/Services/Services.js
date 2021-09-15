@@ -1,4 +1,6 @@
 import React from 'react';
+
+import PROCEDURES_COMMON_INFORMATION from '../../../data/ProceduresCommonInformation';
 import ServiceCard from './ServiceCard';
 import styles from './Services.module.scss';
 
@@ -7,18 +9,17 @@ export default function Services() {
     <div className={styles.container}>
       <h2 className={styles.title}>Ми надаємо послуги:</h2>
       <div className={styles.content}>
-        <ServiceCard
-          title='Догляд за обличчям'
-          img='/assets/images/face_procedure.jpg'
-          path='/'
-          direction='left'
-        />
-        <ServiceCard
-          title='Догляд за тілом'
-          img='/assets/images/body_procedure.jpg'
-          path='/'
-          direction='right'
-        />
+        {PROCEDURES_COMMON_INFORMATION.map((item) => {
+          return (
+            <ServiceCard
+              key={item.id}
+              title={item.title}
+              img={item.img}
+              direction={item.direction}
+              path={item.id}
+            />
+          );
+        })}
       </div>
     </div>
   );

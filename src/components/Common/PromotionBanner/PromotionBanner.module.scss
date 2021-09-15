@@ -9,12 +9,13 @@
 }
 
 .container {
+  margin: 0 auto;
   @include height;
   @include mainMarginTop;
   display: flex;
   align-items: center;
   position: relative;
-
+  max-width: 1300px;
   background-color: $lightPurple;
 }
 
@@ -136,6 +137,7 @@
   background-position: start;
   background-repeat: no-repeat;
   background-size: cover;
+  position: relative;
 
   @media (min-width: 441px) and (max-width: 899px) {
     width: 30%;

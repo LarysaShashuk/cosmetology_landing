@@ -9,9 +9,9 @@ export default function Introduction() {
         <p className={styles.description}>
           Косметологічний кабінет Felicita. Професійний догляд за обличчям та
           моделювання тіла.
-          <p className={styles.introduce}>
+          <span className={styles.introduce}>
             Косметолог - естетист Тетяна Ярмошук.
-          </p>
+          </span>
         </p>
 
         <button className={styles.contentButton}>Детальніше</button>
