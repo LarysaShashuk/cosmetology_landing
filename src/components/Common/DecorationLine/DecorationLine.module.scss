@@ -1,0 +1,16 @@
+@import '../../../styles/index.scss';
+
+.line {
+  width: 100px;
+  height: 4px;
+  background-color: $darkPurple;
+
+  @media (min-width: 501px) and (max-width: 900px) {
+    width: 50px;
+  }
+
+  @media (min-width: 280px) and (max-width: 500px) {
+    width: 30px;
+    height: 2px;
+  }
+}

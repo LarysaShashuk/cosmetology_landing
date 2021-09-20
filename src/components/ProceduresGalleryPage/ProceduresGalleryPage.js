@@ -11,7 +11,6 @@ import styles from './ProceduresGalleryPage.module.scss';
 
 export default function ProceduresGalleryPage(pops) {
   const { id } = useParams();
-  console.log(id);
 
   const currentProceduresGallery = PROCEDURES_INFORMATION.find(
     (item) => item.id === id

@@ -9,7 +9,7 @@ export default function Wishes() {
       <h2 className={styles.title}>Я хочу...</h2>
       <div className={styles.content}>
         {WISHES_INFORMATION.map((item) => {
-          return <WisheCard key={item.id} title={item.title} path={item.id} />;
+          return <WisheCard key={item.id} title={item.title} id={item.id} />;
         })}
       </div>
     </div>

@@ -10,13 +10,15 @@
   align-items: center;
   padding: 25px 30px;
   cursor: pointer;
+  color: black;
+  border-radius: 5px;
 
   @media (min-width: 280px) and (max-width: 900px) {
     width: 100%;
   }
 
   @media (min-width: 280px) and (max-width: 421px) {
-    padding: 15px 15px;
+    padding: 20px 15px;
   }
 
   &:hover {
@@ -32,20 +34,20 @@
 .title {
   font-family: $fontMontserrat;
   font-weight: $regular;
-  font-size: 26px;
+  font-size: 24px;
   text-align: start;
   width: 80%;
 
   @media (min-width: 701px) and (max-width: 1100px) {
-    font-size: 23px;
-  }
-
-  @media (min-width: 280px) and (max-width: 700px) {
     font-size: 20px;
   }
 
-  @media (min-width: 280px) and (max-width: 421px) {
+  @media (min-width: 280px) and (max-width: 700px) {
     font-size: 18px;
+  }
+
+  @media (min-width: 280px) and (max-width: 421px) {
+    font-size: 16px;
   }
 }
 

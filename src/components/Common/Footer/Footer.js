@@ -1,30 +1,52 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Facebook from '../IconsSVG/Facebook';
+import Instagram from '../IconsSVG/Instagram';
 import CONTACT_INFORMATION from '../../../data/ContactInformation';
 import styles from './Footer.module.scss';
 
 export default function Footer() {
-  const { address, phoneNumber, workingHours, daysOff, socialNetworks } =
-    CONTACT_INFORMATION;
+  const {
+    address,
+    googleMaps,
+    phoneNumber,
+    workingHours,
+    daysOff,
+    socialNetworks,
+  } = CONTACT_INFORMATION;
 
   return (
     <div className={styles.commonContainer}>
       <div className={styles.container}>
         <div className={styles.contactInfoWrap}>
-          <p className={styles.address}>
+          <a
+            href={googleMaps}
+            target="_blank"
+            rel="noreferrer"
+            className={styles.address}
+          >
             {address.city}
             <br />
             {address.street}
-          </p>
+          </a>
           <a href={`tel:${phoneNumber}`} className={styles.phoneNumber}>
             {phoneNumber}
           </a>
           <div className={styles.socialNetworks}>
             {socialNetworks.map((item) => {
               return (
-                <a href={item.link} key={item.id}>
-                  <img src={item.icon} alt="socialNetworks" />
+                <a
+                  href={item.link}
+                  key={item.id}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {item.id === 'facebook'
+                    ? Facebook
+                    : item.id === 'instagram'
+                    ? Instagram
+                    : null}
                 </a>
               );
             })}
@@ -43,14 +65,15 @@ export default function Footer() {
               </div>
             );
           })}
-          {daysOff.map((item) => {
-            return (
-              <div key={item.id} className={styles.dayTimeWrap}>
-                <p className={styles.day}>{item.day}</p>
-                <p className={styles.time}>Вихідний</p>
-              </div>
-            );
-          })}
+          {daysOff &&
+            daysOff.map((item) => {
+              return (
+                <div key={item.id} className={styles.dayTimeWrap}>
+                  <p className={styles.day}>{item.day}</p>
+                  <p className={styles.time}>Вихідний</p>
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

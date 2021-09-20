@@ -8,11 +8,9 @@ export default function TextOnlyBlock(props) {
     <div className={styles.container}>
       {content.map((item) => {
         return (
-          <>
-            <div key={item.id}>
-              <p className={styles.text}> {item.text}</p>
-            </div>
-          </>
+          <div key={item.id}>
+            <p className={styles.text}> {item.text}</p>
+          </div>
         );
       })}
     </div>

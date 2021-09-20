@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+import GoBackButton from '../../Common/GoBackButton/GoBackButton';
 import ProcedureCard from './ProcedureCard/ProcedureCard';
 import styles from './ProceduresCardsBlock.module.scss';
 
@@ -40,33 +41,38 @@ export default function ProceduresCardsBlock(props) {
     }
     const rowsNumber = Math.ceil(cardsNumber / cardsPerRow);
     const cardHeight = +windowWidth > 480 ? 375 : 280;
-    const cardPadding = 20;
+    const cardPadding = 35;
     const blockHeight = (cardHeight + cardPadding) * rowsNumber;
 
     return blockHeight;
   };
 
   return (
-    <div
-      className={styles.content}
-      style={{
-        height: `${getContentBlockHeight(
-          proceduresList.length,
-          windowDimensions
-        )}px`,
-      }}
-    >
-      {proceduresList.map((item) => {
-        return (
-          <ProcedureCard
-            key={item.id}
-            title={item.title}
-            img={item.img}
-            price={item.price}
-            id={item.id}
-          />
-        );
-      })}
-    </div>
+    <>
+      <div
+        className={styles.content}
+        style={{
+          height: `${getContentBlockHeight(
+            proceduresList.length,
+            windowDimensions
+          )}px`,
+        }}
+      >
+        {proceduresList.map((item) => {
+          return (
+            <ProcedureCard
+              key={item.id}
+              title={item.title}
+              img={item.img}
+              price={item.price}
+              id={item.id}
+            />
+          );
+        })}
+      </div>
+      <div className={styles.buttonContainer}>
+        <GoBackButton />
+      </div>
+    </>
   );
 }

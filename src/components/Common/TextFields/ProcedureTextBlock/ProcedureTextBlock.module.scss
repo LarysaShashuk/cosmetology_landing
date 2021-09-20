@@ -1,0 +1,57 @@
+@import '../../../../styles/index.scss';
+
+.container {
+  @include secondaryMarginTop;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.title {
+  @include titleProcedurePage;
+  text-align: start;
+}
+
+.line {
+  margin-top: 30px;
+}
+
+.text {
+  @include textProcedurePage;
+  text-align: justify;
+  margin-top: 30px;
+
+  @media (min-width: 280px) and (max-width: 500px) {
+    margin-top: 10px;
+  }
+}
+
+.button {
+  padding: 15px 25px;
+  border: 1px solid $darkPurple;
+  background-color: $darkPurple;
+  color: white;
+  font-family: $fontMontserrat;
+  font-weight: $regular;
+  font-size: 18px;
+  margin-top: 30px;
+  cursor: pointer;
+  border-radius: 5px;
+
+  @media (min-width: 441px) and (max-width: 1220px) {
+    font-size: 14px;
+    margin-top: 25px;
+  }
+
+  @media (min-width: 280px) and (max-width: 440px) {
+    font-size: 12px;
+    margin-top: 20px;
+    padding: 10px 15px;
+  }
+
+  &:hover {
+    color: $darkPurple;
+    background-color: transparent;
+  }
+}

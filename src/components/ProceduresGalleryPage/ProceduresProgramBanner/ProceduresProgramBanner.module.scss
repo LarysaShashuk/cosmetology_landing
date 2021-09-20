@@ -105,34 +105,6 @@
   }
 }
 
-.button {
-  padding: 15px 25px;
-  border: 1px solid $darkPurple;
-  background-color: $darkPurple;
-  color: white;
-  font-family: $fontMontserrat;
-  font-weight: $regular;
-  font-size: 18px;
-  margin-top: 35px;
-  cursor: pointer;
-
-  @media (min-width: 441px) and (max-width: 1220px) {
-    font-size: 14px;
-    margin-top: 25px;
-  }
-
-  @media (min-width: 280px) and (max-width: 440px) {
-    font-size: 12px;
-    margin-top: 20px;
-    padding: 10px 15px;
-  }
-
-  &:hover {
-    color: $darkPurple;
-    background-color: transparent;
-  }
-}
-
 .imgWrap {
   width: 30%;
   @include height;

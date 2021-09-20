@@ -15,7 +15,6 @@ export default function ProceduresProgramBanner(props) {
         <div className={styles.contentWrap}>
           <h2 className={styles.title}>{title}</h2>
           <p className={styles.subtitle}>Підбираються індивідуально</p>
-          <button className={styles.button}>Детальніше</button>
         </div>
         <div
           className={styles.imgWrap}

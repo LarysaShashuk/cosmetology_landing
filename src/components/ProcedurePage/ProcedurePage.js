@@ -1,25 +1,19 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { withRouter } from 'react-router';
 
 import PROCEDURES_DETAILED_INFORMATION from '../../data/ProceduredDetailedInformation';
 import CallToActionBanner from '../Common/CallToActionBanner/CallToActionBanner';
 import TextWithTitleBlock from '../Common/TextFields/TextWithTitleBlock/TextWithTitleBlock';
 import TextOnlyBlock from '../Common/TextFields/TextOnlyBlock/TextOnlyBlock';
 import ListBlock from '../Common/TextFields/ListBlock/ListBlock';
-import GoHomeButton from '../Common/GoHomeButton/GoHomeButton';
+import GoBackButton from '../Common/GoBackButton/GoBackButton';
 import Footer from '../Common/Footer/Footer';
 import Header from '../Common/Header/Header';
+import DecorationLine from '../Common/DecorationLine/DecorationLine';
 import styles from './ProcedurePage.module.scss';
 
-function ProcedurePage(props) {
-  const { history } = props;
+export default function ProcedurePage(props) {
   const { id } = useParams();
-  console.log(history);
-
-  const handleGoBack = () => {
-    return history.goBack();
-  };
 
   const currentProcedure = PROCEDURES_DETAILED_INFORMATION.find(
     (item) => item.id === id
@@ -40,7 +34,7 @@ function ProcedurePage(props) {
           <div className={styles.imgWrap}>
             <img src={img} alt={title} />
           </div>
-          <div className={styles.line}></div>
+          <DecorationLine />
           {description.map((item) => {
             switch (item.type) {
               case 'textWithTitle':
@@ -70,11 +64,9 @@ function ProcedurePage(props) {
           })}
         </div>
       </div>
-      <GoHomeButton handleGoBack={handleGoBack} />
+      <GoBackButton />
       <CallToActionBanner title="Отримати безкоштовну консультацію" />
       <Footer />
     </>
   );
 }
-
-export default withRouter(ProcedurePage);
