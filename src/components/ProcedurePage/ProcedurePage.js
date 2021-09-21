@@ -32,7 +32,7 @@ export default function ProcedurePage(props) {
         <h1 className={styles.title}>{title}</h1>
         <div className={styles.content}>
           <div className={styles.imgWrap}>
-            <img src={img} alt={title} />
+            <img src={process.env.PUBLIC_URL + img} alt={title} />
           </div>
           <DecorationLine />
           {description.map((item) => {

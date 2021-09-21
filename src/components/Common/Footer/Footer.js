@@ -53,7 +53,10 @@ export default function Footer() {
           </div>
         </div>
         <Link to="/" className={styles.logoWrap}>
-          <img src="/assets/icons/logo_white.svg" alt="logo" />
+          <img
+            src={process.env.PUBLIC_URL + '/assets/icons/logo_white.svg'}
+            alt="logo"
+          />
         </Link>
         <div className={styles.scheduleWrap}>
           <p className={styles.scheduleTitle}>Графік роботи:</p>

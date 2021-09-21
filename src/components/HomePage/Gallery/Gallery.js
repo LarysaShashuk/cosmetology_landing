@@ -11,7 +11,7 @@ export default function Gallery() {
           return (
             <img
               className={styles.image}
-              src={item.img}
+              src={process.env.PUBLIC_URL + item.img}
               key={item.id}
               alt={item.id}
             />

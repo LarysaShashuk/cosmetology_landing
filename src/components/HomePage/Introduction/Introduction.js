@@ -30,11 +30,15 @@ export default function Introduction() {
         <div className={styles.imgBlock}>
           <div
             className={styles.backgroundImg}
-            style={{ backgroundImage: 'url(/assets/images/lavenders.png)' }}
+            style={{
+              backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/lavenders.png)`,
+            }}
           ></div>
           <div
             className={styles.mainImg}
-            style={{ backgroundImage: 'url(/assets/images/main_photo.png)' }}
+            style={{
+              backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/main_photo.png)`,
+            }}
           ></div>
         </div>
       </div>

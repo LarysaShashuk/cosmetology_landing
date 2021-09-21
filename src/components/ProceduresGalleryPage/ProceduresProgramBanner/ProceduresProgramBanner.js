@@ -9,7 +9,9 @@ export default function ProceduresProgramBanner(props) {
     <div className={styles.container}>
       <div
         className={styles.backgroundImage}
-        style={{ backgroundImage: 'url(/assets/images/lavenders.png)' }}
+        style={{
+          backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/lavenders.png)`,
+        }}
       ></div>
       <div className={styles.contentImgWrap}>
         <div className={styles.contentWrap}>
@@ -18,7 +20,7 @@ export default function ProceduresProgramBanner(props) {
         </div>
         <div
           className={styles.imgWrap}
-          style={{ backgroundImage: `url(${img})` }}
+          style={{ backgroundImage: `url(${process.env.PUBLIC_URL + img})` }}
         ></div>
       </div>
     </div>

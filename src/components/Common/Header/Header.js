@@ -10,7 +10,10 @@ export default function Header() {
   return (
     <div className={styles.container}>
       <Link to="/" className={styles.logoWrap}>
-        <img src="/assets/icons/logo.svg" alt="logo" />
+        <img
+          src={process.env.PUBLIC_URL + '/assets/icons/logo.svg'}
+          alt="logo"
+        />
       </Link>
       <div className={styles.content}>
         <a

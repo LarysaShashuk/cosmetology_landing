@@ -46,12 +46,14 @@ export default function MoreDetailsPopUp(props) {
         <div className={styles.imgWrap}>
           <div
             className={styles.backgroundImg}
-            style={{ backgroundImage: 'url(/assets/images/lavenders.png)' }}
+            style={{
+              backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/lavenders.png)`,
+            }}
           ></div>
           <div
             className={styles.additionalImg}
             style={{
-              backgroundImage: 'url(/assets/images/additional_photo.png)',
+              backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/additional_photo.png)`,
             }}
           ></div>
         </div>

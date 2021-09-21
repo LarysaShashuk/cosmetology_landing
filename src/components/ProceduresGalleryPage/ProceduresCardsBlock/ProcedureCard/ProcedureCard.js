@@ -10,7 +10,7 @@ export default function ProcedureCard(props) {
     <div className={styles.container}>
       <div
         className={styles.imgWrap}
-        style={{ backgroundImage: `url(${img})` }}
+        style={{ backgroundImage: `url(${process.env.PUBLIC_URL + img})` }}
       ></div>
       <div className={styles.content}>
         <h3 className={styles.title}>{title}</h3>

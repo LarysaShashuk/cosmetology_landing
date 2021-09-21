@@ -1,8 +1,16 @@
 @import '../../../styles/index.scss';
 
-.content {
+.container {
   @include layout;
   @include mainMarginTop;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.content {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -24,5 +32,9 @@
 }
 
 .buttonContainer {
-  @include layout;
+  height: 76px;
+
+  @media (min-width: 280px) and (max-width: 900px) {
+    height: 51px;
+  }
 }

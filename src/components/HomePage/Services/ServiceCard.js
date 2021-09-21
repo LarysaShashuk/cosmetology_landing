@@ -12,7 +12,7 @@ export default function ServiceCard(props) {
       <div className={cx([styles.title, !isLeft && styles.right])}>{title}</div>
       <div
         className={styles.content}
-        style={{ backgroundImage: `url(${img})` }}
+        style={{ backgroundImage: `url(${process.env.PUBLIC_URL + img})` }}
       >
         <div className={styles.gradient}>
           <Link

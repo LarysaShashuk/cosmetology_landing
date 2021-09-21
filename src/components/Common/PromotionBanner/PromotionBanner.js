@@ -17,7 +17,7 @@ export default function PromotionBanner(props) {
         </div>
         <div
           className={styles.imgWrap}
-          style={{ backgroundImage: `url(${img})` }}
+          style={{ backgroundImage: `url(${process.env.PUBLIC_URL + img})` }}
         ></div>
       </div>
     </div>
