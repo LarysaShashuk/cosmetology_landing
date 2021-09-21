@@ -32,6 +32,7 @@ export default function Introduction() {
             className={styles.backgroundImg}
             style={{
               backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/lavenders.png)`,
+              opacity: '20%',
             }}
           ></div>
           <div
