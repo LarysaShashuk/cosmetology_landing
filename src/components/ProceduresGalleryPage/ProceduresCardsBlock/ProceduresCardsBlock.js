@@ -7,6 +7,8 @@ import styles from './ProceduresCardsBlock.module.scss';
 export default function ProceduresCardsBlock(props) {
   const { proceduresList } = props;
 
+  console.log(window);
+
   function getWindowDimensions() {
     const { innerWidth: width } = window;
     return width;
@@ -16,7 +18,6 @@ export default function ProceduresCardsBlock(props) {
     getWindowDimensions()
   );
 
-  const [contentBlockHeight, setContentBlockHeight] = useState(null);
   const getContentBlockHeight = (cardsNumber, windowWidth) => {
     let cardsPerRow;
     switch (true) {
@@ -59,10 +60,6 @@ export default function ProceduresCardsBlock(props) {
 
     window.addEventListener('resize', handleResize);
 
-    setContentBlockHeight(
-      getContentBlockHeight(proceduresList.length, windowDimensions)
-    );
-
     return () => window.removeEventListener('resize', handleResize);
   }, [proceduresList.length, windowDimensions]);
 
@@ -71,7 +68,10 @@ export default function ProceduresCardsBlock(props) {
       <div
         className={styles.container}
         style={{
-          height: `${contentBlockHeight}px`,
+          height: `${getContentBlockHeight(
+            proceduresList.length,
+            windowDimensions
+          )}px`,
         }}
       >
         <div className={styles.content}>
