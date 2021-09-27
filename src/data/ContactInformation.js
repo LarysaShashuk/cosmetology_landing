@@ -5,7 +5,7 @@ const CONTACT_INFORMATION = {
   },
   googleMaps: 'https://goo.gl/maps/7fRCuNvxUZrtjWq29',
   phoneNumber: '+38 (067) 492 84 83',
-  telegram: 'yarmoshuk_bohdan',
+  telegram: 'cosmetology_yarmoshuk',
   viber: '380674928483',
   workingHours: [
     {

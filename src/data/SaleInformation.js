@@ -1,6 +1,6 @@
 const SALE_INFORMATION = {
   title: 'Даруємо масаж обличчя',
-  subtitle: 'до кожної чистки обличчя в подарунок!',
+  subtitle: 'до кожної процедури косметичного догляду в подарунок!',
   endTime: '*до 31.10.2021',
   img: '/assets/images/sale-1.jpg',
 };
