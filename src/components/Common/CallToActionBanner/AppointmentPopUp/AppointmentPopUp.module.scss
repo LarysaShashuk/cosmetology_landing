@@ -102,6 +102,20 @@
   }
 }
 
+.phoneNumber {
+color: $darkPurple;
+
+margin-top: 20px;
+
+  @media (min-width: 451px) and (max-width: 1150px) {
+    margin-top: 15px;
+  }
+
+  @media (min-width: 280px) and (max-width: 450px) {
+    margin-top: 10px;
+  }
+}
+
 .buttonsWrap {
   margin-top: 50px;
   display: flex;

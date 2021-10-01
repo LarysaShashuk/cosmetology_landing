@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import styles from './AppointmentPopUp.module.scss';
+import cx from 'classnames';
 
 import CONTACT_INFORMATION from '../../../../data/ContactInformation';
 import useOutsideClick from '../../../../services/useOutsideClick';
@@ -48,6 +49,12 @@ export default function AppointmentPopUp(props) {
           Залиште Ваш запит в нашому Телеграмі або Вайбері, а також напишіть
           підходящий для вас день та час
         </p>
+        <a
+          href={`tel:${CONTACT_INFORMATION.phoneNumber}`}
+          className={cx(styles.title, styles.phoneNumber)}
+        >
+          {CONTACT_INFORMATION.phoneNumber}
+        </a>
         <div className={styles.buttonsWrap}>
           <a
             href={`tg://resolve?domain=${CONTACT_INFORMATION.telegram}`}

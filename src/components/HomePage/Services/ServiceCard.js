@@ -9,7 +9,7 @@ export default function ServiceCard(props) {
 
   return (
     <div className={styles.container}>
-      <div className={cx([styles.title, !isLeft && styles.right])}>{title}</div>
+      <Link to={`/procedures_gallery/${path}`} className={cx([styles.title, !isLeft && styles.right])}>{title}</Link>
       <div
         className={styles.content}
         style={{ backgroundImage: `url(${process.env.PUBLIC_URL + img})` }}
