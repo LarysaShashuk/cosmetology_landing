@@ -47,7 +47,7 @@ export default function AppointmentPopUp(props) {
 
         <p className={styles.title}>
           Залиште Ваш запит в нашому Телеграмі або Вайбері, а також напишіть
-          підходящий для вас день та час
+          зручний для вас день та час
         </p>
         <a
           href={`tel:${CONTACT_INFORMATION.phoneNumber}`}
