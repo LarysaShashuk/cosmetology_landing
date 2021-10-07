@@ -1,7 +1,7 @@
 const CONTACT_INFORMATION = {
   address: {
     city: 'м.Рівне',
-    street: 'вул. В. Чорновола 15',
+    street: 'вул. В. Чорновола 17а',
   },
   googleMaps: 'https://goo.gl/maps/7fRCuNvxUZrtjWq29',
   phoneNumber: '+38 (067) 492 84 83',
