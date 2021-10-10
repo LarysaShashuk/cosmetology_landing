@@ -87,8 +87,8 @@ export default function MoreDetailsPopUp(props) {
                   {item.id === 'facebook'
                     ? Facebook
                     : item.id === 'instagram'
-                    ? Instagram
-                    : null}
+                      ? Instagram
+                      : null}
                 </a>
               );
             })}
