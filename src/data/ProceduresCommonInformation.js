@@ -162,6 +162,12 @@ const PROCEDURES_COMMON_INFORMATION = [
         img: '/assets/images/body_procedures/body_procedure_11.jpg',
         price: 'від 500 грн',
       },
+      {
+        id: 'vacuum_massage',
+        title: 'Вакуумний масаж',
+        img: '/assets/images/body_procedures/body_procedure_13.jpg',
+        price: 'від 150 грн',
+      },
     ],
   },
 ];
