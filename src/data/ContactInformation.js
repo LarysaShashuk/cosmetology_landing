@@ -3,7 +3,7 @@ const CONTACT_INFORMATION = {
     city: 'м.Рівне',
     street: 'вул. В. Чорновола 17а',
   },
-  googleMaps: 'https://goo.gl/maps/7fRCuNvxUZrtjWq29',
+  googleMaps: 'https://goo.gl/maps/ZXJNeuACYP1NENoaA',
   phoneNumber: '+38 (067) 492 84 83',
   telegram: 'cosmetology_yarmoshuk',
   viber: '380674928483',
