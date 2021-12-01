@@ -1,0 +1,71 @@
+@import '../../../../styles/index.scss';
+
+.container {
+  width: 49%;
+  background-color: $lightPurple;
+  margin-bottom: 20px;
+  border-left: 4px solid $darkPurple;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 30px;
+  cursor: pointer;
+  color: black;
+  border-radius: 5px;
+
+  @media (min-width: 280px) and (max-width: 900px) {
+    width: 100%;
+  }
+
+  @media (min-width: 280px) and (max-width: 421px) {
+    padding: 20px 15px;
+  }
+
+  &:hover {
+    background-color: $darkPurple;
+    color: white;
+  }
+
+  &:hover svg path {
+    fill: white;
+  }
+}
+
+.title {
+  font-family: $fontMontserrat;
+  font-weight: $regular;
+  font-size: 24px;
+  text-align: start;
+  width: 80%;
+
+  @media (min-width: 701px) and (max-width: 1100px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 280px) and (max-width: 700px) {
+    font-size: 18px;
+  }
+
+  @media (min-width: 280px) and (max-width: 421px) {
+    font-size: 16px;
+  }
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding-left: 30px;
+
+  @media (min-width: 280px) and (max-width: 421px) {
+    padding-left: 20px;
+  }
+
+  svg {
+    width: 20px;
+    @media (min-width: 280px) and (max-width: 421px) {
+      width: 15px;
+    }
+  }
+}

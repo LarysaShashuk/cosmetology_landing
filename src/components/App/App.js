@@ -2,10 +2,10 @@ import React from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 import ScrollToTop from '../../services/ScrollToTop';
-import HomeHage from '../HomePage/HomePage';
-import ProcedurePage from '../ProcedurePage/ProcedurePage';
-import ProceduresGalleryPage from '../ProceduresGalleryPage/ProceduresGalleryPage';
-import WishPage from '../WishPage/WishPage';
+import HomeHage from '../Landing/HomePage/HomePage';
+import ProcedurePage from '../Landing/ProcedurePage/ProcedurePage';
+import ProceduresGalleryPage from '../Landing/ProceduresGalleryPage/ProceduresGalleryPage';
+import WishPage from '../Landing/WishPage/WishPage';
 import styles from './App.module.scss';
 
 function App() {

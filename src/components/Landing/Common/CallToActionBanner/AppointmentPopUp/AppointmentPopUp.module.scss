@@ -1,0 +1,179 @@
+@import '../../../../../styles/index.scss';
+
+.container {
+  position: absolute;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  background-color: rgba($darkPurple, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+}
+
+.innerWrap {
+  width: 72%;
+  max-width: 1030px;
+  height: 535px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  position: relative;
+
+  @media (min-width: 1151px) and (max-width: 1300px) {
+    height: 500px;
+  }
+
+  @media (min-width: 736px) and (max-width: 1150px) {
+    height: 350px;
+  }
+
+  @media (min-width: 601px) and (max-width: 735px) {
+    width: 575px;
+    height: 350px;
+  }
+
+  @media (min-width: 280px) and (max-width: 600px) {
+    height: 350px;
+    width: 92%;
+    border-radius: 5px;
+  }
+
+  @media (min-width: 280px) and (max-width: 450px) {
+    height: 250px;
+    width: 92%;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+   padding: 10px;
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+
+  &:hover {
+  background-color: rgba($darkPurple, 0.15);
+  border-radius: 5px;
+ 
+  }
+
+  @media (min-width: 1051px) and (max-width: 1185px) {
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (min-width: 280px) and (max-width: 1050px) {
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (min-width: 280px) and (max-width: 735px) {
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
+
+.title {
+  font-family: $fontMontserrat;
+  font-weight: $regular;
+  font-size: 30px;
+  width: 77%;
+  line-height: 170%;
+
+  @media (min-width: 451px) and (max-width: 1150px) {
+    font-size: 18px;
+  }
+
+  @media (min-width: 280px) and (max-width: 450px) {
+    font-size: 14px;
+    width: 85%;
+  }
+}
+
+.phoneNumber {
+  color: $darkPurple;
+
+  margin-top: 20px;
+
+  @media (min-width: 451px) and (max-width: 1150px) {
+    margin-top: 15px;
+  }
+
+  @media (min-width: 280px) and (max-width: 450px) {
+    margin-top: 10px;
+  }
+}
+
+.buttonsWrap {
+  margin-top: 30px;
+  display: flex;
+
+  a:first-child {
+    margin-right: 30px;
+  }
+
+  @media (min-width: 451px) and (max-width: 1150px) {
+    margin-top: 20px;
+    a:first-child {
+      margin-right: 15px;
+    }
+  }
+
+  @media (min-width: 280px) and (max-width: 450px) {
+    margin-top: 15px;
+    a:first-child {
+      margin-right: 10px;
+    }
+  }
+}
+
+.button {
+  padding: 20px 30px;
+  border: 1px solid $darkPurple;
+  background-color: $darkPurple;
+  color: white;
+  font-family: $fontMontserrat;
+  font-weight: $regular;
+  font-size: 26px;
+  border-radius: 5px;
+
+  @media (min-width: 451px) and (max-width: 1150px) {
+    padding: 15px 20px;
+    font-size: 16px;
+  }
+
+  @media (min-width: 280px) and (max-width: 450px) {
+    font-size: 12px;
+    padding: 10px 15px;
+  }
+
+  &:hover {
+    background-color: white;
+    color: $darkPurple;
+  }
+}

@@ -1,0 +1,21 @@
+@import '../../../../styles/index.scss';
+
+.container {
+  @include layout;
+  @include mainMarginTop;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  @include heading;
+}
+
+.content {
+  width: 100%;
+  @include mainMarginTop;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
