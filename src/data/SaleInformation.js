@@ -1,8 +1,8 @@
 const SALE_INFORMATION = {
-  title: 'Даруємо дарсонвалізацію',
+  title: 'Даруємо мікродермабразію',
   subtitle: 'до кожної процедури чистки обличчя в подарунок!',
-  endTime: '*до 30.11.2021',
-  img: '/assets/images/sale-1.jpg',
+  endTime: '*до 31.01.2022',
+  img: '/assets/images/sale-2.jpeg',
 };
 
 export default SALE_INFORMATION;
