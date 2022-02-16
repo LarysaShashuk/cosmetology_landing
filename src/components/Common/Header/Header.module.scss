@@ -1,7 +1,14 @@
 @import '../../../styles/index.scss';
 
+.wrap {
+  border-bottom: 1px solid $lightPurple;
+
+  @media (min-width: 280px) and (max-width: 590px) {
+    padding-bottom: 20px;
+  }
+}
+
 .container {
-  width: 100%;
   height: 120px;
   display: flex;
   justify-content: space-between;
@@ -10,18 +17,24 @@
 
   @include layout;
 
-  @media (min-width: 280px) and (max-width: 590px) {
-    flex-direction: column;
+  @media (min-width: 591px) and (max-width: 740px) {
+    height: 100px;
   }
 
-  @media (min-width: 280px) and (max-width: 440px) {
-    height: 150px;
-    margin-bottom: 20px;
+  @media (min-width: 280px) and (max-width: 590px) {
+    flex-direction: column;
+    height: 175px;
   }
 }
 
 .logoWrap {
-  @media (min-width: 280px) and (max-width: 740px) {
+  width: 14%;
+  max-width: 182px;
+  @media (min-width: 591px) and (max-width: 1150px) {
+    min-width: 120px;
+  }
+
+  @media (min-width: 280px) and (max-width: 590px) {
     width: 100px;
   }
 }
@@ -35,27 +48,27 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
+    font-size: 16px;
     font-family: $fontMontserrat;
     font-weight: $regular;
     color: black;
 
-    @media (min-width: 740px) and (max-width: 1024px) {
-      font-size: 16px;
-    }
-
-    @media (min-width: 280px) and (max-width: 739px) {
+    @media (min-width: 741px) and (max-width: 1150px) {
       font-size: 14px;
     }
+    @media (min-width: 280px) and (max-width: 970px) {
+      height: 25px;
+    }
+
+    @media (min-width: 280px) and (max-width: 740px) {
+      font-size: 10px;
+    }
   }
 
-  @media (min-width: 440px) and (max-width: 590px) {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  @media (min-width: 280px) and (max-width: 440px) {
+  @media (min-width: 280px) and (max-width: 970px) {
     flex-direction: column-reverse;
+    justify-content: center;
+    height: auto;
   }
 }
 
@@ -63,11 +76,11 @@
   padding-right: 35px;
   border-right: 3px solid $darkPurple;
 
-  @media (min-width: 280px) and (max-width: 1024px) {
+  @media (min-width: 280px) and (max-width: 1150px) {
     padding-right: 25px;
   }
 
-  @media (min-width: 280px) and (max-width: 590px) {
+  @media (min-width: 280px) and (max-width: 970px) {
     border: none;
     width: auto;
     padding: 0;
@@ -80,40 +93,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  font-family: $fontMontserrat;
-  font-weight: $regular;
-  color: black;
 
-  @media (min-width: 740px) and (max-width: 1024px) {
-    font-size: 16px;
-  }
-
-  @media (min-width: 280px) and (max-width: 739px) {
-    font-size: 14px;
-  }
-
-  @media (min-width: 280px) and (max-width: 1024px) {
+  @media (min-width: 280px) and (max-width: 1150px) {
     padding-left: 25px;
   }
 
-  @media (min-width: 280px) and (max-width: 590px) {
+  @media (min-width: 280px) and (max-width: 970px) {
     border: none;
     width: auto;
     padding: 0;
   }
 }
+.authButtons {
+  display: flex;
 
-.line {
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background-color: $lightPurple;
-  top: 140px;
-  left: 0;
-  right: 0;
-
-  @media (min-width: 280px) and (max-width: 440px) {
-    top: 180px;
+  .leftButton {
+    margin-right: 10px;
   }
 }

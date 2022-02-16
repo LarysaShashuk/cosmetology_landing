@@ -1,10 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import Header from '../../Common/Header/Header';
 import GoBackButton from '../Common/GoBackButton/GoBackButton';
 import CallToActionBanner from '../Common/CallToActionBanner/CallToActionBanner';
-import Footer from '../../Common/Footer/Footer';
 import DecorationLine from '../../Common/DecorationLine/DecorationLine';
 import TextWithTitleBlock from '../../Common/TextFields/TextWithTitleBlock/TextWithTitleBlock';
 import TextOnlyBlock from '../../Common/TextFields/TextOnlyBlock/TextOnlyBlock';
@@ -25,8 +23,7 @@ export default function WishPage(props) {
   const { title, description } = currentWish;
 
   return (
-    <>
-      <Header />
+    <div className={styles.wrap}>
       <div className={styles.container}>
         <h1 className={styles.title}>{title}</h1>
 
@@ -73,7 +70,6 @@ export default function WishPage(props) {
       </div>
       <GoBackButton />
       <CallToActionBanner title="Отримати безкоштовну консультацію" />
-      <Footer />
-    </>
+    </div>
   );
 }

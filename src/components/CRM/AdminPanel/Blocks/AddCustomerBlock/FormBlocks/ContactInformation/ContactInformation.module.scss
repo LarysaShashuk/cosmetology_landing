@@ -1,0 +1,39 @@
+@import '../../../../../../../styles/index.scss';
+
+.inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.checkboxesWrapper {
+display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.additionalCommentWrapper {
+display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.tagsWrapper {
+margin: 20px 0;
+}
+
+.newTagInputsWrapper {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  width: 100%;
+  align-items: center;
+}
+
+.addButtonBlock {
+margin-left: 20px;
+}
+
+.chipsStack {
+margin-bottom: 20px;
+}

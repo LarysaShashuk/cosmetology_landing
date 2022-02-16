@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React from 'react';
+
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 import CONTACT_INFORMATION from '../../../../../data/ContactInformation';
-import useOutsideClick from '../../../../../services/useOutsideClick';
 import Facebook from '../../../../Common/IconsSVG/Facebook';
 import Instagram from '../../../../Common/IconsSVG/Instagram';
 import Close from '../../../../Common/IconsSVG/Close';
@@ -30,17 +31,11 @@ export default function MoreDetailsPopUp(props) {
     }
   };
 
-  const ref = useRef();
-
-  useOutsideClick(ref, () => {
-    handleClose();
-  });
-
   return (
     <div className={styles.container} style={{ height: `${height}px` }}>
+  <ClickAwayListener onClickAway={() => handleClose()}>
       <div
         className={styles.innerWrap}
-        ref={ref}
         style={{ marginTop: `${+positionWindow + getMarginTop(innerWidth)}px` }}
       >
         <div className={styles.imgWrap}>
@@ -95,6 +90,7 @@ export default function MoreDetailsPopUp(props) {
           </div>
         </div>
       </div>
+    </ClickAwayListener>
     </div>
   );
 }

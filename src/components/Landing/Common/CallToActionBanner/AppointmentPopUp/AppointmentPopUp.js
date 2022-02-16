@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styles from './AppointmentPopUp.module.scss';
 import cx from 'classnames';
 
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+
 import CONTACT_INFORMATION from '../../../../../data/ContactInformation';
-import useOutsideClick from '../../../../../services/useOutsideClick';
 import Close from '../../../../Common/IconsSVG/Close';
 
 export default function AppointmentPopUp(props) {
@@ -28,17 +29,11 @@ export default function AppointmentPopUp(props) {
     }
   };
 
-  const ref = useRef();
-
-  useOutsideClick(ref, () => {
-    handleClose();
-  });
-
   return (
     <div className={styles.container} style={{ height: `${height}px` }}>
+    <ClickAwayListener onClickAway={() => handleClose()}>
       <div
         className={styles.innerWrap}
-        ref={ref}
         style={{ marginTop: `${+positionWindow + getMarginTop(innerWidth)}px` }}
       >
         <div onClick={() => handleClose()} className={styles.closeButton}>
@@ -70,6 +65,7 @@ export default function AppointmentPopUp(props) {
           </a>
         </div>
       </div>
+      </ClickAwayListener>
     </div>
   );
 }

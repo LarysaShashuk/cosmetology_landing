@@ -1,5 +1,8 @@
 @import '../../../styles/index.scss';
 
+.wrap {
+  @include mainMarginBottom;
+}
 .container {
   display: flex;
   flex-direction: column;

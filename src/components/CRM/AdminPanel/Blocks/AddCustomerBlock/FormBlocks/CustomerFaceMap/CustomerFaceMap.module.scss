@@ -1,0 +1,32 @@
+.tableWrapper {
+ margin-bottom: 40px;
+}
+
+.inputsWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.checkboxesWrapper {
+display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.innerCheckboxesWrapper {
+display: flex;
+  flex-direction: column;
+  height: 200px !important;
+  flex-wrap: wrap;
+}
+
+.additionalCommentWrapper {
+display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.addButtonBlock {
+margin-bottom: 20px;
+}

@@ -1,7 +1,7 @@
 @import './responsive';
 
 // colors
-$darkPurple: #682c8f;
+$darkPurple: #6a1b9a;
 $lightPurple: #ebe6ed;
 $grayBackground: #f4f3f3;
 
@@ -28,6 +28,7 @@ $semiBold: 600;
   font-family: $fontMontserrat;
   font-size: 55px;
   font-weight: $regular;
+  margin: 0 auto;
 
   @media (min-width: 900px) and (max-width: 1200px) {
     font-size: 40px;
@@ -53,7 +54,17 @@ $semiBold: 600;
     margin-top: 40px;
   }
 }
+@mixin mainMarginBottom {
+  margin-bottom: 70px;
 
+  @media (min-width: 421px) and (max-width: 900px) {
+    margin-bottom: 50px;
+  }
+
+  @include mobile {
+    margin-bottom: 40px;
+  }
+}
 @mixin secondaryMarginTop {
   margin-top: 50px;
 

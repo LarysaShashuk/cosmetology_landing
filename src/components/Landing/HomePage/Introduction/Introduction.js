@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useCallback } from 'react';
 import styles from './Introduction.module.scss';
 import MoreDetailsPopUp from './MoreDetailsPopUp/MoreDetailsPopUp';
 
 export default function Introduction() {
   const [isMoreDetaisWindowOpen, setMoreDetaisWindowOpen] = useState(false);
+  const handleClosePopup = useCallback(()=> setMoreDetaisWindowOpen(false), []);
 
   return (
     <>
@@ -21,7 +22,7 @@ export default function Introduction() {
           </p>
 
           <button
-            onClick={() => setMoreDetaisWindowOpen(true)}
+            onClick={() => { setMoreDetaisWindowOpen(true)}}
             className={styles.contentButton}
           >
             Детальніше
@@ -44,7 +45,7 @@ export default function Introduction() {
         </div>
       </div>
       {isMoreDetaisWindowOpen && (
-        <MoreDetailsPopUp handleClose={() => setMoreDetaisWindowOpen(false)} />
+        <MoreDetailsPopUp handleClose={handleClosePopup} />
       )}
     </>
   );

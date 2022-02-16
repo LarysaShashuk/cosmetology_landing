@@ -1,0 +1,21 @@
+.filteringOptionContainer{
+display: flex;
+flex-wrap: wrap;
+flex-direction: column;
+height: 520px;
+
+  @media (min-width: 781px) and (max-width: 1550px) {
+    height: 1110px;
+  }
+
+    @media (min-width: 671px) and (max-width: 780px) {
+    height: 1040px;
+  }
+
+    @media  (max-width: 670px) {
+    height: auto;
+  }
+
+
+}
+

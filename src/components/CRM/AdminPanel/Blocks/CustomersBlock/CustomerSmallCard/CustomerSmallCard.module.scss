@@ -1,0 +1,62 @@
+@import '../../../../../../styles/index.scss';
+
+.container {
+  margin: 5px !important;
+
+  width: 350px;
+
+  @media (min-width: 690px) and (max-width: 900px) {
+    width: 48%;
+  }
+
+  @media (max-width: 440px) {
+    width: 98%;
+  }
+}
+
+.card {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chipsStack {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-top: 15px !important;
+
+  @media (max-width: 1150px) {
+    margin-top: 10px !important;
+  }
+}
+
+.contentTitle {
+  font-weight: 600 !important;
+  font-size: 16px;
+  margin-top: 15px !important;
+  margin-bottom: 5px !important;
+
+  @media (max-width: 1150px) {
+    font-size: 14px !important;
+    margin-top: 10px !important;
+    margin-bottom: 5px !important;
+  }
+}
+
+.contentText {
+  margin-top: 10px !important;
+}
+
+.contentSubTitle {
+  font-weight: 600;
+}
+
+.body2 {
+  color: black !important;
+
+  @media (max-width: 1150px) {
+    font-size: 13px !important;
+  }
+}

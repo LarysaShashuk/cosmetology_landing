@@ -2,11 +2,9 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import PROCEDURES_INFORMATION from '../../../data/ProceduresCommonInformation';
-import Header from '../../Common/Header/Header';
 import ProceduresCardsBlock from './ProceduresCardsBlock/ProceduresCardsBlock';
 import ProceduresProgramBanner from './ProceduresProgramBanner/ProceduresProgramBanner';
 import CallToActionBanner from '../Common/CallToActionBanner/CallToActionBanner';
-import Footer from '../../Common/Footer/Footer';
 import styles from './ProceduresGalleryPage.module.scss';
 
 export default function ProceduresGalleryPage(pops) {
@@ -23,8 +21,6 @@ export default function ProceduresGalleryPage(pops) {
   const { title, proceduresList, proceduresProgram } = currentProceduresGallery;
 
   return (
-    <>
-      <Header />
       <div className={styles.container}>
         <h1 className={styles.title}>{title}</h1>
         <ProceduresCardsBlock proceduresList={proceduresList} />
@@ -33,8 +29,6 @@ export default function ProceduresGalleryPage(pops) {
           title="Отримати 
 безкоштовну консультацію"
         />
-        <Footer />
       </div>
-    </>
   );
 }

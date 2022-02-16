@@ -1,0 +1,47 @@
+@import '../../../styles/index.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  padding-bottom: 50px;
+}
+
+.inputsBlock {
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+}
+
+.form {
+  width: 350px;
+
+  @media (min-width: 280px) and (max-width: 380px) {
+    width: 310px;
+  }
+}
+
+.inputsBlock {
+  .emailInput,
+  .passwordInput,
+  .firstNameInput,
+  .lastNameInput,
+  .fatherNameInput,
+  .phoneInput {
+    margin-bottom: 15px;
+  }
+}
+
+.submitButton {
+  margin: 16px;
+  margin-top: 0;
+}
+
+.textHelper {
+  margin-top: 20px !important;
+
+  a {
+    margin-left: 10px;
+  }
+}

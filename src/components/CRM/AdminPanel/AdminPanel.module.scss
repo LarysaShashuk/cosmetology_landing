@@ -1,0 +1,26 @@
+.selected {
+  color: white !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 5px !important;
+}
+
+.box {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.tabpanel {
+  width: 95%;
+  padding: 10px;
+
+  @media (max-width: 460px) {
+    width: 88%;
+    padding: 0;
+  }
+
+  .box {
+    @media (max-width: 460px) {
+      padding: 5px !important;
+    }
+  }
+}
