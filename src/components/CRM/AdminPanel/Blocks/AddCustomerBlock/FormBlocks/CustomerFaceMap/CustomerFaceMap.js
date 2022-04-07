@@ -17,23 +17,30 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 import {
-  CUSTOMER_FACE_MAP,
+  CUSTOMERS_FACE_MAP,
   FACE_MARKERS,
 } from '../../../../Common/Constants/CustomerFaceMapConstants';
 import ButtonsBar from '../../../../Common/ButtonsBar/ButtonsBar';
-import { CustomerFaceMapInitialValues } from './InitialValues';
-import styles from './CustomerFaceMap.module.scss';
+import CustomeAlert from '../../../../Common/CustomeAlert/CustomeAlert';
 import {
   FormBlockCustomeTheme,
   TableCustomeTheme,
   CheckboxesCustomeTheme,
 } from '../../MuiThemes.js';
+import { CustomerFaceMapInitialValues } from './InitialValues';
+import styles from './CustomerFaceMap.module.scss';
 
 export default function CustomerFaceMap() {
   const [customerFaceData, setCustomerFaceData] = useState([]);
-
+  const [isCustomerFaceMapSaved, setCustomerFaceMapSaved] = useState(false);
   return (
     <>
+      {isCustomerFaceMapSaved ? (
+        <CustomeAlert
+          title="Збережено"
+          message="Дані цієї частини форми - успішно збережено."
+        />
+      ) : null}
       {customerFaceData.length ? (
         <ThemeProvider theme={TableCustomeTheme}>
           <div className={styles.tableWrapper}>
@@ -41,24 +48,24 @@ export default function CustomerFaceMap() {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>{CUSTOMER_FACE_MAP.data}</TableCell>
+                    <TableCell>{CUSTOMERS_FACE_MAP.data}</TableCell>
                     <TableCell align="right">
-                      {CUSTOMER_FACE_MAP.upperThird}
+                      {CUSTOMERS_FACE_MAP.upperThird}
                     </TableCell>
                     <TableCell align="right">
-                      {CUSTOMER_FACE_MAP.middleThird}
+                      {CUSTOMERS_FACE_MAP.middleThird}
                     </TableCell>
                     <TableCell align="right">
-                      {CUSTOMER_FACE_MAP.bottomThird}
+                      {CUSTOMERS_FACE_MAP.bottomThird}
                     </TableCell>
                     <TableCell align="right">
-                      {CUSTOMER_FACE_MAP.neck}
+                      {CUSTOMERS_FACE_MAP.neck}
                     </TableCell>
                     <TableCell align="right">
-                      {CUSTOMER_FACE_MAP.neckline}
+                      {CUSTOMERS_FACE_MAP.neckline}
                     </TableCell>
                     <TableCell align="right">
-                      {CUSTOMER_FACE_MAP.tZone}
+                      {CUSTOMERS_FACE_MAP.tZone}
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -117,7 +124,7 @@ export default function CustomerFaceMap() {
               actions.setSubmitting(true);
               actions.resetForm();
               console.log(values);
-              setCustomerFaceData([...customerFaceData, values]);
+              setCustomerFaceMapSaved(true);
             }}
           >
             {(formik) => (
@@ -130,10 +137,14 @@ export default function CustomerFaceMap() {
                   <TextField
                     id="data"
                     {...formik.getFieldProps('data')}
-                    label={CUSTOMER_FACE_MAP.data}
+                    label={CUSTOMERS_FACE_MAP.data}
                     variant="outlined"
                     color="primary"
                     size="medium"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
                 </div>
 
@@ -144,7 +155,7 @@ export default function CustomerFaceMap() {
                       component="fieldset"
                       variant="standard"
                     >
-                      <Chip label={CUSTOMER_FACE_MAP.upperThird + ':'} />
+                      <Chip label={CUSTOMERS_FACE_MAP.upperThird + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
                         <FormControlLabel
                           control={
@@ -322,7 +333,7 @@ export default function CustomerFaceMap() {
                       component="fieldset"
                       variant="standard"
                     >
-                      <Chip label={CUSTOMER_FACE_MAP.middleThird + ':'} />
+                      <Chip label={CUSTOMERS_FACE_MAP.middleThird + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
                         <FormControlLabel
                           control={
@@ -500,7 +511,7 @@ export default function CustomerFaceMap() {
                       component="fieldset"
                       variant="standard"
                     >
-                      <Chip label={CUSTOMER_FACE_MAP.bottomThird + ':'} />
+                      <Chip label={CUSTOMERS_FACE_MAP.bottomThird + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
                         <FormControlLabel
                           control={
@@ -678,7 +689,7 @@ export default function CustomerFaceMap() {
                       component="fieldset"
                       variant="standard"
                     >
-                      <Chip label={CUSTOMER_FACE_MAP.neck + ':'} />
+                      <Chip label={CUSTOMERS_FACE_MAP.neck + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
                         <FormControlLabel
                           control={
@@ -852,7 +863,7 @@ export default function CustomerFaceMap() {
                       component="fieldset"
                       variant="standard"
                     >
-                      <Chip label={CUSTOMER_FACE_MAP.neckline + ':'} />
+                      <Chip label={CUSTOMERS_FACE_MAP.neckline + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
                         <FormControlLabel
                           control={
@@ -1026,7 +1037,7 @@ export default function CustomerFaceMap() {
                       component="fieldset"
                       variant="standard"
                     >
-                      <Chip label={CUSTOMER_FACE_MAP.tZone + ':'} />
+                      <Chip label={CUSTOMERS_FACE_MAP.tZone + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
                         <FormControlLabel
                           control={
@@ -1197,7 +1208,7 @@ export default function CustomerFaceMap() {
                   <TextField
                     id="comment"
                     {...formik.getFieldProps('comment')}
-                    label={CUSTOMER_FACE_MAP.comment}
+                    label={CUSTOMERS_FACE_MAP.comment}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -1205,19 +1216,26 @@ export default function CustomerFaceMap() {
                 </div>
                 <div className={styles.addButtonBlock}>
                   <ButtonsBar
-                    handleSave={() => formik.handleSubmit()}
+                    handleSave={() => {
+                    formik.resetForm();
+                      setCustomerFaceData([...customerFaceData, formik.values]);
+                    }}
                     saveButtonName="Додати"
-                    disabled={!formik.isValid}
+                    disabled={isCustomerFaceMapSaved}
                   />
                 </div>
 
                 <div className={styles.buttonsBlock}>
                   <ButtonsBar
-                    handleSave={() => console.log('Save')}
-                    handleClose={() => formik.resetForm()}
+                    handleSave={() => formik.handleSubmit()}
+                    handleClose={() => {
+                      formik.resetForm();
+                      setCustomerFaceMapSaved(false);
+                      setCustomerFaceData([]);
+                    }}
                     saveButtonName="Зберегти"
                     closeButtonName="Очистити"
-                    disabled={!formik.isValid}
+                    disabled={isCustomerFaceMapSaved}
                   />
                 </div>
               </form>

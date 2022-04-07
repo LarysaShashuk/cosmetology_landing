@@ -14,19 +14,16 @@ export const CARDIOVASCULAR_DISEASE = {
   infarct: 'інфаркт',
   pacemakerPresence: 'наявність кардіостимулятора',
   phlebitisPhlebosisThrombosis: 'флебіти, флебози, тромбози',
-  comment: 'коментар',
 };
 
 export const GASTROINTESTINAL_TRACT_DISEASES = {
   liverDisease: 'хвороби печінки',
   gallbladderDisease: 'хвороби жовчного міхура, дискінезії, каміння',
-  comment: 'коментар',
 };
 
 export const ENDOCRINOLOGY = {
   thyroidDisease: 'хвороби щитоподібної залози',
   diabetes: 'цукровий діабет',
-  comment: 'коментар',
 };
 
 export const OTHER_CONDITIONS = {
@@ -50,12 +47,10 @@ export const OTHER_CONDITIONS = {
   pregnancyAndLactation: 'планування вагітності, вагітність і лактація',
   beautyInjections: "ін'єкції краси останні 6 міс (ботокс, філери і т.д.)",
   metalImplants: 'металеві імпланти',
-  comment: 'коментар',
 };
 
 export const STATE_AFTER = {
  operations: "операцій",
     laserGrinding: "лазерних шліфувань",
     deepPeels: "глибоких пілінгів",
-    comment: 'коментар',
 }

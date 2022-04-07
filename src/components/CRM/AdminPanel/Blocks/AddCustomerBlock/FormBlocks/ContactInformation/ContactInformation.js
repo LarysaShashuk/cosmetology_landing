@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 
 import TextField from '@mui/material/TextField';
 import { ThemeProvider } from '@mui/material/styles';
@@ -10,13 +11,17 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
-import ChipsStack from '../../../../ActionPanel/ChipsStack/ChipsStack';
-
+import { contactInformationAdded } from '../../../../../../../redux/actions/customerActions';
+import CustomeAlert from '../../../../Common/CustomeAlert/CustomeAlert';
 import ButtonsBar from '../../../../Common/ButtonsBar/ButtonsBar';
 import {
   CONTACT_INFORMATION,
-  SKIN_TYPE, SKIN_CONDITION, ALLERGIC_REACTIONS, MORPHOTYPE
+  SKIN_TYPE,
+  SKIN_CONDITION,
+  ALLERGIC_REACTIONS,
+  MORPHOTYPE,
 } from '../../../../Common/Constants/ContactInformationConstants';
+import ChipsStack from '../../../../ActionPanel/ChipsStack/ChipsStack';
 import {
   FormBlockCustomeTheme,
   CheckboxesCustomeTheme,
@@ -25,17 +30,31 @@ import styles from './ContactInformation.module.scss';
 import { ContactInformationInitialValues } from './InitialValues';
 
 export default function ContactInformation() {
+  let dispatch = useDispatch();
+
   const [tags, setTags] = useState([]);
+  const [contactInformation, setContactInformation] = useState({});
+  const [isContactInformationSaved, setContactInformationSaved] =
+    useState(false);
+  const [isTagsSaved, setTagsSaved] = useState(false);
 
   const handleChipDeleting = (chip) => {
-  
-  setTags(tags.filter((tag) =>  tag !== chip ))
-  
-  }
+    setTags(tags.filter((tag) => tag !== chip));
+  };
+
+  const state = useSelector((state) => state.customer);
+
+  console.log(state);
 
   return (
     <ThemeProvider theme={FormBlockCustomeTheme}>
       <div>
+        {isContactInformationSaved ? (
+          <CustomeAlert
+            title="Збережено"
+            message="Дані цієї частини форми - успішно збережено."
+          />
+        ) : null}
         <Formik
           initialValues={ContactInformationInitialValues}
           validationSchema={Yup.object({
@@ -45,15 +64,17 @@ export default function ContactInformation() {
             // .phone(undefined, undefined, 'Номер телефону повин відповідати прикладу: +380111111111.'),
           })}
           onSubmit={(values, actions) => {
-            actions.setSubmitting(true);
-            // actions.resetForm();
-            console.log(values);
+            actions.setSubmitting(false);
+            setContactInformationSaved(true);
+            dispatch(contactInformationAdded({ ...contactInformation, tags }));
           }}
         >
           {(formik) => (
-            <form onSubmit={(e) => {
+            <form
+              onSubmit={(e) => {
                 e.preventDefault();
-              }}>
+              }}
+            >
               <div className={styles.inputsWrapper}>
                 <TextField
                   id="lastName"
@@ -130,6 +151,10 @@ export default function ContactInformation() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  type="date"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
                 />
                 <TextField
                   id="instagram"
@@ -164,6 +189,7 @@ export default function ContactInformation() {
                             id="skinType.dry"
                             name={'skinType.dry'}
                             {...formik.getFieldProps('skinType.dry')}
+                            checked={formik.values.skinType.dry}
                           />
                         }
                         label={SKIN_TYPE.dry}
@@ -175,6 +201,7 @@ export default function ContactInformation() {
                             id="skinType.normal"
                             name={'skinType.normal'}
                             {...formik.getFieldProps('skinType.normal')}
+                            checked={formik.values.skinType.normal}
                           />
                         }
                         label={SKIN_TYPE.normal}
@@ -186,9 +213,10 @@ export default function ContactInformation() {
                             id="skinType.fat"
                             name={'skinType.fat'}
                             {...formik.getFieldProps('skinType.fat')}
+                            checked={formik.values.skinType.fat}
                           />
                         }
-                       label={SKIN_TYPE.fat}
+                        label={SKIN_TYPE.fat}
                       />
 
                       <FormControlLabel
@@ -197,6 +225,7 @@ export default function ContactInformation() {
                             id="skinType.combined"
                             name={'skinType.combined'}
                             {...formik.getFieldProps('skinType.combined')}
+                            checked={formik.values.skinType.combined}
                           />
                         }
                         label={SKIN_TYPE.combined}
@@ -204,15 +233,6 @@ export default function ContactInformation() {
                     </FormGroup>
                   </FormControl>
                 </ThemeProvider>
-
-                <TextField
-                  id="skinType.comment"
-                  {...formik.getFieldProps('skinType.comment')}
-                  label={SKIN_TYPE.comment}
-                  variant="outlined"
-                  color="primary"
-                  size="small"
-                />
               </div>
 
               <div className={styles.checkboxesWrapper}>
@@ -232,6 +252,7 @@ export default function ContactInformation() {
                             {...formik.getFieldProps(
                               'skinCondition.problematic'
                             )}
+                            checked={formik.values.skinCondition.problematic}
                           />
                         }
                         label={SKIN_CONDITION.problematic}
@@ -243,6 +264,7 @@ export default function ContactInformation() {
                             id="skinCondition.sensitive"
                             name={'skinCondition.sensitive'}
                             {...formik.getFieldProps('skinCondition.sensitive')}
+                            checked={formik.values.skinCondition.sensitive}
                           />
                         }
                         label={SKIN_CONDITION.sensitive}
@@ -256,6 +278,7 @@ export default function ContactInformation() {
                             {...formik.getFieldProps(
                               'skinCondition.dehydrated'
                             )}
+                            checked={formik.values.skinCondition.dehydrated}
                           />
                         }
                         label={SKIN_CONDITION.dehydrated}
@@ -269,6 +292,7 @@ export default function ContactInformation() {
                             {...formik.getFieldProps(
                               'skinCondition.dryIrritated'
                             )}
+                            checked={formik.values.skinCondition.dryIrritated}
                           />
                         }
                         label={SKIN_CONDITION.dryIrritated}
@@ -280,6 +304,7 @@ export default function ContactInformation() {
                             id="skinCondition.fat"
                             name={'skinCondition.fat'}
                             {...formik.getFieldProps('skinCondition.fat')}
+                            checked={formik.values.skinCondition.fat}
                           />
                         }
                         label={SKIN_CONDITION.fat}
@@ -291,9 +316,10 @@ export default function ContactInformation() {
                             id="skinCondition.thin"
                             name={'skinCondition.thin'}
                             {...formik.getFieldProps('skinCondition.thin')}
+                            checked={formik.values.skinCondition.thin}
                           />
                         }
-                       label={SKIN_CONDITION.thin}
+                        label={SKIN_CONDITION.thin}
                       />
 
                       <FormControlLabel
@@ -302,6 +328,7 @@ export default function ContactInformation() {
                             id="skinCondition.rosacea"
                             name={'skinCondition.rosacea'}
                             {...formik.getFieldProps('skinCondition.rosacea')}
+                            checked={formik.values.skinCondition.rosacea}
                           />
                         }
                         label={SKIN_CONDITION.rosacea}
@@ -313,6 +340,7 @@ export default function ContactInformation() {
                             id="skinCondition.acne"
                             name={'skinCondition.acne'}
                             {...formik.getFieldProps('skinCondition.acne')}
+                            checked={formik.values.skinCondition.acne}
                           />
                         }
                         label={SKIN_CONDITION.acne}
@@ -326,6 +354,7 @@ export default function ContactInformation() {
                             {...formik.getFieldProps(
                               'skinCondition.pigmentation'
                             )}
+                            checked={formik.values.skinCondition.pigmentation}
                           />
                         }
                         label={SKIN_CONDITION.pigmentation}
@@ -339,9 +368,10 @@ export default function ContactInformation() {
                             {...formik.getFieldProps(
                               'skinCondition.fluffOnFace'
                             )}
+                            checked={formik.values.skinCondition.fluffOnFace}
                           />
                         }
-                       label={SKIN_CONDITION.fluffOnFace}
+                        label={SKIN_CONDITION.fluffOnFace}
                       />
 
                       <FormControlLabel
@@ -350,9 +380,10 @@ export default function ContactInformation() {
                             id="skinCondition.hirsutism"
                             name={'skinCondition.hirsutism'}
                             {...formik.getFieldProps('skinCondition.hirsutism')}
+                            checked={formik.values.skinCondition.hirsutism}
                           />
                         }
-                       label={SKIN_CONDITION.hirsutism}
+                        label={SKIN_CONDITION.hirsutism}
                       />
 
                       <FormControlLabel
@@ -363,6 +394,10 @@ export default function ContactInformation() {
                             {...formik.getFieldProps(
                               'skinCondition.bacterialViralSkinDiseases'
                             )}
+                            checked={
+                              formik.values.skinCondition
+                                .bacterialViralSkinDiseases
+                            }
                           />
                         }
                         label={SKIN_CONDITION.bacterialViralSkinDiseases}
@@ -370,15 +405,6 @@ export default function ContactInformation() {
                     </FormGroup>
                   </FormControl>
                 </ThemeProvider>
-
-                <TextField
-                  id="skinCondition.comment"
-                  {...formik.getFieldProps('skinCondition.comment')}
-                  label={SKIN_CONDITION.comment}
-                  variant="outlined"
-                  color="primary"
-                  size="small"
-                />
               </div>
 
               <div className={styles.checkboxesWrapper}>
@@ -396,6 +422,7 @@ export default function ContactInformation() {
                             id="allergicReactions.food"
                             name={'allergicReactions.food'}
                             {...formik.getFieldProps('allergicReactions.food')}
+                            checked={formik.values.allergicReactions.food}
                           />
                         }
                         label={ALLERGIC_REACTIONS.food}
@@ -409,6 +436,7 @@ export default function ContactInformation() {
                             {...formik.getFieldProps(
                               'allergicReactions.medicines'
                             )}
+                            checked={formik.values.allergicReactions.medicines}
                           />
                         }
                         label={ALLERGIC_REACTIONS.medicines}
@@ -422,6 +450,7 @@ export default function ContactInformation() {
                             {...formik.getFieldProps(
                               'allergicReactions.cosmetics'
                             )}
+                            checked={formik.values.allergicReactions.cosmetics}
                           />
                         }
                         label={ALLERGIC_REACTIONS.cosmetics}
@@ -429,15 +458,6 @@ export default function ContactInformation() {
                     </FormGroup>
                   </FormControl>
                 </ThemeProvider>
-
-                <TextField
-                  id="allergicReactions.comment"
-                  {...formik.getFieldProps('allergicReactions.comment')}
-                  label={ALLERGIC_REACTIONS.comment}
-                  variant="outlined"
-                  color="primary"
-                  size="small"
-                />
               </div>
 
               <div className={styles.checkboxesWrapper}>
@@ -455,6 +475,7 @@ export default function ContactInformation() {
                             id="morphotype.tired"
                             name={'morphotype.tired'}
                             {...formik.getFieldProps('morphotype.tired')}
+                            checked={formik.values.morphotype.tired}
                           />
                         }
                         label={MORPHOTYPE.tired}
@@ -468,6 +489,7 @@ export default function ContactInformation() {
                             {...formik.getFieldProps(
                               'morphotype.finelyWrinkled'
                             )}
+                            checked={formik.values.morphotype.finelyWrinkled}
                           />
                         }
                         label={MORPHOTYPE.finelyWrinkled}
@@ -481,9 +503,12 @@ export default function ContactInformation() {
                             {...formik.getFieldProps(
                               'morphotype.edematousDeforming'
                             )}
+                            checked={
+                              formik.values.morphotype.edematousDeforming
+                            }
                           />
                         }
-                         label={MORPHOTYPE.edematousDeforming}
+                        label={MORPHOTYPE.edematousDeforming}
                       />
 
                       <FormControlLabel
@@ -492,9 +517,10 @@ export default function ContactInformation() {
                             id="morphotype.mixed"
                             name={'morphotype.mixed'}
                             {...formik.getFieldProps('morphotype.mixed')}
+                            checked={formik.values.morphotype.mixed}
                           />
                         }
-                       label={MORPHOTYPE.mixed}
+                        label={MORPHOTYPE.mixed}
                       />
 
                       <FormControlLabel
@@ -503,22 +529,14 @@ export default function ContactInformation() {
                             id="morphotype.muscular"
                             name={'morphotype.muscular'}
                             {...formik.getFieldProps('morphotype.muscular')}
+                            checked={formik.values.morphotype.muscular}
                           />
                         }
-                       label={MORPHOTYPE.muscular}
+                        label={MORPHOTYPE.muscular}
                       />
                     </FormGroup>
                   </FormControl>
                 </ThemeProvider>
-
-                <TextField
-                  id="morphotype.comment"
-                  {...formik.getFieldProps('morphotype.comment')}
-                 label={MORPHOTYPE.comment}
-                  variant="outlined"
-                  color="primary"
-                  size="small"
-                />
               </div>
 
               <div className={styles.additionalCommentWrapper}>
@@ -534,11 +552,23 @@ export default function ContactInformation() {
 
               <div className={styles.buttonsBlock}>
                 <ButtonsBar
-                  handleSave={() => formik.handleSubmit()}
-                  handleClose={() => formik.resetForm()}
+                  handleSave={() => {
+                    formik.handleSubmit();
+                    setContactInformation(formik.values);
+                  }}
+                  handleClose={() => {
+                    formik.resetForm();
+                    setContactInformationSaved(false);
+                    setContactInformation({});
+                    dispatch(
+                      tags?.length
+                        ? contactInformationAdded({ tags })
+                        : contactInformationAdded({})
+                    );
+                  }}
                   saveButtonName="Зберегти"
                   closeButtonName="Очистити"
-                  disabled={!formik.isValid}
+                  disabled={!formik.isValid || isContactInformationSaved}
                 />
               </div>
             </form>
@@ -548,9 +578,15 @@ export default function ContactInformation() {
 
       <div className={styles.tagsWrapper}>
         <Chip label="Теги:" />
-        {tags.length ? (
+        {isTagsSaved ? (
+          <CustomeAlert
+            title="Збережено"
+            message=" Дані цієї частини форми - успішно збережено."
+          />
+        ) : null}
+        {tags?.length ? (
           <div className={styles.chipsStack}>
-            <ChipsStack tagsArr={tags} handleDelete={handleChipDeleting}  />
+            <ChipsStack tagsArr={tags} handleDelete={handleChipDeleting} />
           </div>
         ) : null}
 
@@ -559,14 +595,17 @@ export default function ContactInformation() {
           onSubmit={(values, actions) => {
             actions.setSubmitting(true);
             actions.resetForm();
-            console.log(values);
-            setTags([...tags, values.newTag]);
+            // console.log(values);
+            setTagsSaved(true);
+            dispatch(contactInformationAdded({ ...contactInformation, tags }));
           }}
         >
           {(formikNewTag) => (
-            <form onSubmit={(e) => {
+            <form
+              onSubmit={(e) => {
                 e.preventDefault();
-              }}>
+              }}
+            >
               <div className={styles.newTagInputsWrapper}>
                 <TextField
                   id="newTag"
@@ -579,19 +618,32 @@ export default function ContactInformation() {
                 />
                 <div className={styles.addButtonBlock}>
                   <ButtonsBar
-                    handleSave={() => formikNewTag.handleSubmit()}
+                    handleSave={() => {
+                      setTags([...tags, formikNewTag.values.newTag]);
+                      formikNewTag.resetForm();
+                    }}
                     saveButtonName="Додати"
+                    disabled={isTagsSaved}
                   />
                 </div>
-  </div>
-                <div className={styles.buttonsBlock}>
-                  <ButtonsBar
-                    handleSave={() => formikNewTag.handleSubmit()}
-                    handleClose={() => formikNewTag.resetForm()}
-                    saveButtonName="Зберегти"
-                    closeButtonName="Очистити"
-                  />
-              
+              </div>
+              <div className={styles.buttonsBlock}>
+                <ButtonsBar
+                  handleSave={() => formikNewTag.handleSubmit()}
+                  handleClose={() => {
+                    formikNewTag.resetForm();
+                    setTagsSaved(false);
+                    setTags([]);
+                    dispatch(
+                      contactInformation
+                        ? contactInformationAdded({ ...contactInformation })
+                        : contactInformationAdded({})
+                    );
+                  }}
+                  saveButtonName="Зберегти"
+                  closeButtonName="Очистити"
+                  disabled={isTagsSaved}
+                />
               </div>
             </form>
           )}

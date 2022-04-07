@@ -1,5 +1,5 @@
 export const APPOINTMENTS_PLAN = {
-  data: 'Дата',
+  data: 'Дата та час',
   procedure: 'Послуги',
   comment: 'Коментар',
   result: 'Результат',

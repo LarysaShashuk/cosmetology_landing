@@ -23,7 +23,7 @@ const blogReducer = (state = initialState, action) => {
       return {
         ...state,
         articles: null,
-        loading: false
+        loading: false,
       };
 
     default:

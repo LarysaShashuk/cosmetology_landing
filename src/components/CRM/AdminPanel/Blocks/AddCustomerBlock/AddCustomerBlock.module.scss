@@ -1,3 +1,27 @@
+@import '../../../../../styles/index.scss';
+
 .buttonsBlock {
 margin-top: 20px;
+}
+
+.title {
+  font-family: $fontMontserrat;
+  font-size: 35px;
+  font-weight: $regular;
+  text-align: start;
+  margin: 5px 0 10px 0;
+  display: flex;
+
+  @media (min-width: 900px) and (max-width: 1200px) {
+    font-size: 30px;
+  }
+
+  @media (min-width: 441px) and (max-width: 899px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 280px) and (max-width: 440px) {
+    font-size: 18px;
+  }
+
 }

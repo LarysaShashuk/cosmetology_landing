@@ -1,11 +1,19 @@
 .checkboxesWrapper {
-display: flex;
+  display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+
+  @media (max-width: 740px) {
+    margin-bottom: 10px;
+  }
 }
 
 .additionalCommentWrapper {
-display: flex;
+  display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+
+  @media (max-width: 740px) {
+    margin-bottom: 10px;
+  }
 }

@@ -70,6 +70,24 @@ export const FormBlockCustomeTheme = createTheme({
         },
       },
     },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        input: {
+          '@media (max-width: 740px)': {
+            fontSize: '12px',
+          },
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          '@media (max-width: 740px)': {
+            fontSize: '12px',
+          },
+        },
+      },
+    },
   },
 });
 
@@ -91,9 +109,11 @@ export const CheckboxesCustomeTheme = createTheme({
           backgroundColor: purple[800],
           color: 'white',
           borderRadius: '5px',
-          padding: '20px 10px',
+          padding: '12px 10px',
           marginBottom: '10px',
           fontSize: '14px',
+          overflowWrap: 'normal',
+          height: 'auto',
 
           '@media (max-width: 780px)': {
             fontSize: '12px',
@@ -103,6 +123,11 @@ export const CheckboxesCustomeTheme = createTheme({
             color: 'white',
           },
         },
+        label: {
+          display: 'flex',
+          overflow: 'visible',
+          whiteSpace: 'break-spaces',
+        },
       },
     },
     MuiFormControlLabel: {
@@ -111,7 +136,6 @@ export const CheckboxesCustomeTheme = createTheme({
           fontSize: '14px',
 
           '@media (min-width: 671px) and (max-width: 780px)': {
-            width: '210px',
             fontSize: '12px',
           },
 
@@ -171,23 +195,28 @@ export const TableCustomeTheme = createTheme({
     fontFamily: 'Montserrat',
   },
   components: {
-  MuiTableContainer: {
-  styleOverrides: {
+    MuiTableContainer: {
+      styleOverrides: {
         root: {
           boxShadow: 'none',
         },
-        
-      },},
+      },
+    },
     MuiTableCell: {
       styleOverrides: {
         root: {
-          // fontSize: '12px',
+          '@media (max-width: 930px)': {
+            fontSize: '10px',
+          },
         },
         head: {
           backgroundColor: purple[800],
           color: 'white',
           fontWeight: '400',
-          // fontSize: '14px',
+
+          '@media (max-width: 930px)': {
+            fontSize: '10px',
+          },
         },
       },
     },

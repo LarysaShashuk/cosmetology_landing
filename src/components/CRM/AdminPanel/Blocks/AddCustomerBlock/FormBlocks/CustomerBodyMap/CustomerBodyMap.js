@@ -13,25 +13,26 @@ import { ThemeProvider } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 
 import {
-  CUSTOMER_BODY,
-  CELLULITE,
-  APPOINTMENTS_PLAN,
+  CUSTOMERS_BODY_MAP,
+  CELLULITIS_ZONES,
+  PROCEDURES_RESULTS,
 } from '../../../../Common/Constants/CustomerBodyMapConstants';
+import ButtonsBar from '../../../../Common/ButtonsBar/ButtonsBar';
+import CustomeAlert from '../../../../Common/CustomeAlert/CustomeAlert';
+import { FormBlockCustomeTheme, TableCustomeTheme } from '../../MuiThemes.js';
 import {
   CustomerBodyInitialValues,
   CelluliteInitialValues,
   AppointmentsPlanInitialValues,
 } from './InitialValues';
-import ButtonsBar from '../../../../Common/ButtonsBar/ButtonsBar';
 import styles from './CustomerBodyMap.module.scss';
-import {
-  FormBlockCustomeTheme,
-  TableCustomeTheme,
-} from '../../MuiThemes.js';
 
 export default function CustomerBodyMap() {
   const [celluliteZonesSchema, setCelluliteZonesSchema] = useState([]);
   const [appointments, setAppointments] = useState([]);
+  const [isCelluliteInformationSaved, setCelluliteInformationSaved] =
+    useState(false);
+  const [isAppointmentsPlanSaved, setAppointmentsPlanSaved] = useState(false);
 
   return (
     <>
@@ -55,7 +56,7 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="height"
                     {...formik.getFieldProps('height')}
-                    label={CUSTOMER_BODY.height}
+                    label={CUSTOMERS_BODY_MAP.height}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -64,7 +65,7 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="edemaPredisposition"
                     {...formik.getFieldProps('edemaPredisposition')}
-                    label={CUSTOMER_BODY.edemaPredisposition}
+                    label={CUSTOMERS_BODY_MAP.edemaPredisposition}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -72,7 +73,7 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="vascularProblems"
                     {...formik.getFieldProps('vascularProblems')}
-                    label={CUSTOMER_BODY.vascularProblems}
+                    label={CUSTOMERS_BODY_MAP.vascularProblems}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -80,7 +81,7 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="stretchMarks"
                     {...formik.getFieldProps('stretchMarks')}
-                    label={CUSTOMER_BODY.stretchMarks}
+                    label={CUSTOMERS_BODY_MAP.stretchMarks}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -102,10 +103,15 @@ export default function CustomerBodyMap() {
         </div>
       </ThemeProvider>
 
-
- <ThemeProvider theme={FormBlockCustomeTheme}>
- <Chip label="Целюліт:" />
-</ThemeProvider>
+      <ThemeProvider theme={FormBlockCustomeTheme}>
+        <Chip label="Целюліт:" />
+        {isCelluliteInformationSaved ? (
+          <CustomeAlert
+            title="Збережено"
+            message="Дані цієї частини форми - успішно збережено."
+          />
+        ) : null}
+      </ThemeProvider>
 
       {celluliteZonesSchema.length ? (
         <ThemeProvider theme={TableCustomeTheme}>
@@ -114,9 +120,9 @@ export default function CustomerBodyMap() {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>{CELLULITE.data}</TableCell>
-                    <TableCell align="right">{CELLULITE.zone}</TableCell>
-                    <TableCell align="right">{CELLULITE.stage}</TableCell>
+                    <TableCell>{CELLULITIS_ZONES.data}</TableCell>
+                    <TableCell align="right">{CELLULITIS_ZONES.zone}</TableCell>
+                    <TableCell align="right">{CELLULITIS_ZONES.stage}</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -144,7 +150,7 @@ export default function CustomerBodyMap() {
               actions.setSubmitting(true);
               actions.resetForm();
               console.log(values);
-              setCelluliteZonesSchema([...celluliteZonesSchema, values]);
+              setCelluliteInformationSaved(true);
             }}
           >
             {(formik) => (
@@ -157,16 +163,20 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="data"
                     {...formik.getFieldProps('data')}
-                    label={CELLULITE.data}
+                    label={CELLULITIS_ZONES.data}
                     variant="outlined"
                     color="primary"
                     size="medium"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
 
                   <TextField
                     id="zone"
                     {...formik.getFieldProps('zone')}
-                    label={CELLULITE.zone}
+                    label={CELLULITIS_ZONES.zone}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -174,7 +184,7 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="stage"
                     {...formik.getFieldProps('stage')}
-                    label={CELLULITE.stage}
+                    label={CELLULITIS_ZONES.stage}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -183,9 +193,28 @@ export default function CustomerBodyMap() {
 
                 <div className={styles.addButtonBlock}>
                   <ButtonsBar
-                    handleSave={() => formik.handleSubmit()}
+                    handleSave={() => {
+                      formik.resetForm();
+                      setCelluliteZonesSchema([
+                        ...celluliteZonesSchema,
+                        formik.values,
+                      ]);
+                    }}
                     saveButtonName="Додати"
-                    disabled={!formik.isValid}
+                    disabled={isCelluliteInformationSaved}
+                  />
+                </div>
+                <div className={styles.buttonsBlock}>
+                  <ButtonsBar
+                    handleSave={() => formik.handleSubmit()}
+                    handleClose={() => {
+                      formik.resetForm();
+                      setCelluliteInformationSaved(false);
+                      setCelluliteZonesSchema([]);
+                    }}
+                    saveButtonName="Зберегти"
+                    closeButtonName="Очистити"
+                    disabled={isCelluliteInformationSaved}
                   />
                 </div>
               </form>
@@ -194,9 +223,15 @@ export default function CustomerBodyMap() {
         </div>
       </ThemeProvider>
 
-<ThemeProvider theme={FormBlockCustomeTheme}>
- <Chip label="Графік відвідувань:" />
-</ThemeProvider>
+      <ThemeProvider theme={FormBlockCustomeTheme}>
+        <Chip label="Графік відвідувань:" />
+        {isAppointmentsPlanSaved ? (
+          <CustomeAlert
+            title="Збережено"
+            message="Дані цієї частини форми - успішно збережено."
+          />
+        ) : null}
+      </ThemeProvider>
       {appointments.length ? (
         <ThemeProvider theme={TableCustomeTheme}>
           <div className={styles.tableWrapper}>
@@ -204,21 +239,21 @@ export default function CustomerBodyMap() {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>{APPOINTMENTS_PLAN.data}</TableCell>
+                    <TableCell>{PROCEDURES_RESULTS.data}</TableCell>
                     <TableCell align="right">
-                      {APPOINTMENTS_PLAN.weight}
+                      {PROCEDURES_RESULTS.weight}
                     </TableCell>
                     <TableCell align="right">
-                      {APPOINTMENTS_PLAN.bloodPressure}
+                      {PROCEDURES_RESULTS.bloodPressure}
                     </TableCell>
                     <TableCell align="right">
-                      {APPOINTMENTS_PLAN.waistCircumference}
+                      {PROCEDURES_RESULTS.waistCircumference}
                     </TableCell>
                     <TableCell align="right">
-                      {APPOINTMENTS_PLAN.thighsCircumference}
+                      {PROCEDURES_RESULTS.thighsCircumference}
                     </TableCell>
                     <TableCell align="right">
-                      {APPOINTMENTS_PLAN.otherMeasurements}
+                      {PROCEDURES_RESULTS.otherMeasurements}
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -258,7 +293,7 @@ export default function CustomerBodyMap() {
               actions.setSubmitting(true);
               actions.resetForm();
               console.log(values);
-              setAppointments([...appointments, values]);
+              setAppointmentsPlanSaved(true);
             }}
           >
             {(formik) => (
@@ -271,16 +306,20 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="data"
                     {...formik.getFieldProps('data')}
-                    label={APPOINTMENTS_PLAN.data}
+                    label={PROCEDURES_RESULTS.data}
                     variant="outlined"
                     color="primary"
                     size="medium"
+                    type="date"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
 
                   <TextField
                     id="weight"
                     {...formik.getFieldProps('weight')}
-                    label={APPOINTMENTS_PLAN.weight}
+                    label={PROCEDURES_RESULTS.weight}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -288,7 +327,7 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="bloodPressure"
                     {...formik.getFieldProps('bloodPressure')}
-                    label={APPOINTMENTS_PLAN.bloodPressure}
+                    label={PROCEDURES_RESULTS.bloodPressure}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -296,7 +335,7 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="waistCircumference"
                     {...formik.getFieldProps('waistCircumference')}
-                    label={APPOINTMENTS_PLAN.waistCircumference}
+                    label={PROCEDURES_RESULTS.waistCircumference}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -304,7 +343,7 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="thighsCircumference"
                     {...formik.getFieldProps('thighsCircumference')}
-                    label={APPOINTMENTS_PLAN.thighsCircumference}
+                    label={PROCEDURES_RESULTS.thighsCircumference}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -313,7 +352,7 @@ export default function CustomerBodyMap() {
                   <TextField
                     id="otherMeasurements"
                     {...formik.getFieldProps('otherMeasurements')}
-                    label={APPOINTMENTS_PLAN.otherMeasurements}
+                    label={PROCEDURES_RESULTS.otherMeasurements}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -322,21 +361,30 @@ export default function CustomerBodyMap() {
 
                 <div className={styles.addButtonBlock}>
                   <ButtonsBar
-                    handleSave={() => formik.handleSubmit()}
+                    handleSave={() => {
+                      formik.resetForm();
+                      setAppointments([...appointments, formik.values]);
+                    }}
                     saveButtonName="Додати"
-                    disabled={!formik.isValid}
+                    disabled={isAppointmentsPlanSaved}
                   />
                 </div>
 
                 <div className={styles.buttonsBlock}>
                   <ButtonsBar
-                    handleSave={() => console.log('Save')}
-                    handleClose={() => formik.resetForm()}
+                    handleSave={() => formik.handleSubmit()}
+                    handleClose={() => {
+                      formik.resetForm();
+                      setAppointmentsPlanSaved(false);
+                      setAppointments([]);
+                    }}
                     saveButtonName="Зберегти"
                     closeButtonName="Очистити"
-                    disabled={!formik.isValid}
+                    disabled={isAppointmentsPlanSaved}
                   />
                 </div>
+
+               
               </form>
             )}
           </Formik>

@@ -54,6 +54,13 @@ const CustomeMUITheme = createTheme({
         },
       },
     },
+        MuiAlert: {
+    styleOverrides: {
+        root: {
+          marginBottom: '20px'
+        },
+      },
+    }
   },
 });
 

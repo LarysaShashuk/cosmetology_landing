@@ -4,22 +4,34 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+
+  @media (max-width: 740px) {
+    margin-bottom: 10px;
+  }
 }
 
 .checkboxesWrapper {
-display: flex;
+  display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+
+    @media (max-width: 740px) {
+    margin-bottom: 10px;
+  }
 }
 
 .additionalCommentWrapper {
-display: flex;
+  display: flex;
   flex-direction: column;
   margin-bottom: 20px;
+
+    @media (max-width: 740px) {
+    margin-bottom: 10px;
+  }
 }
 
 .tagsWrapper {
-margin: 20px 0;
+  margin: 20px 0;
 }
 
 .newTagInputsWrapper {
@@ -28,12 +40,20 @@ margin: 20px 0;
   margin-bottom: 20px;
   width: 100%;
   align-items: center;
+
+      @media (max-width: 740px) {
+    margin-bottom: 10px;
+  }
 }
 
 .addButtonBlock {
-margin-left: 20px;
+  margin-left: 20px;
 }
 
 .chipsStack {
-margin-bottom: 20px;
+  margin-bottom: 20px;
+
+      @media (max-width: 740px) {
+    margin-bottom: 10px;
+  }
 }

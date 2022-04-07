@@ -13,7 +13,6 @@ export const ContactInformationInitialValues = {
     normal: false,
     fat: false,
     combined: false,
-    comment: '',
   },
   skinCondition: {
     problematic: false,
@@ -28,13 +27,11 @@ export const ContactInformationInitialValues = {
     fluffOnFace: false,
     hirsutism: false,
     bacterialViralSkinDiseases: false,
-    comment: '',
   },
   allergicReactions: {
     food: false,
     medicines: false,
     cosmetics: false,
-    comment: '',
   },
   morphotype: {
     tired: false,
@@ -42,7 +39,6 @@ export const ContactInformationInitialValues = {
     edematousDeforming: false,
     mixed: false,
     muscular: false,
-    comment: '',
   },
   comment: '',
 };

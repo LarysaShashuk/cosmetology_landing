@@ -11,20 +11,30 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { ThemeProvider } from '@mui/material/styles';
 
-import {APPOINTMENTS_PLAN} from '../../../../Common/Constants/AppointmentsPlanConstants';
+import { APPOINTMENTS_PLAN } from '../../../../Common/Constants/AppointmentsPlanConstants';
 import ButtonsBar from '../../../../Common/ButtonsBar/ButtonsBar';
+import CustomeAlert from '../../../../Common/CustomeAlert/CustomeAlert';
+import { FormBlockCustomeTheme, TableCustomeTheme } from '../../MuiThemes.js';
 import { AppointmentsPlanInitialValues } from './InitialValues';
 import styles from './AppointmentsPlan.module.scss';
-import {
-  FormBlockCustomeTheme,
-  TableCustomeTheme,
-} from '../../MuiThemes.js';
 
 export default function AppointmentsPlan() {
   const [appointments, setAppointments] = useState([]);
+  const [isAppointmentsPlanSaved, setAppointmentsPlanSaved] = useState(false);
+
+  const showCorrectDateFormat = (string) => {
+    return string.replace('T', ', ');
+  };
 
   return (
     <>
+      {isAppointmentsPlanSaved ? (
+        <CustomeAlert
+          title="Збережено"
+          message="Дані цієї частини форми - успішно збережено."
+        />
+      ) : null}
+
       {appointments.length ? (
         <ThemeProvider theme={TableCustomeTheme}>
           <div className={styles.tableWrapper}>
@@ -32,17 +42,23 @@ export default function AppointmentsPlan() {
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Дата</TableCell>
-                    <TableCell align="right">Процедури</TableCell>
-                    <TableCell align="right">Коментар</TableCell>
-                    <TableCell align="right">Результат</TableCell>
+                    <TableCell>{APPOINTMENTS_PLAN.data}</TableCell>
+                    <TableCell align="right">
+                      {APPOINTMENTS_PLAN.procedure}
+                    </TableCell>
+                    <TableCell align="right">
+                      {APPOINTMENTS_PLAN.comment}
+                    </TableCell>
+                    <TableCell align="right">
+                      {APPOINTMENTS_PLAN.result}
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {appointments.map((appointment, index) => (
                     <TableRow key={index}>
                       <TableCell component="th" scope="row">
-                        {appointment.data}
+                        {showCorrectDateFormat(appointment.data)}
                       </TableCell>
                       <TableCell align="right">
                         {appointment.procedure}
@@ -66,7 +82,7 @@ export default function AppointmentsPlan() {
               actions.setSubmitting(true);
               actions.resetForm();
               console.log(values);
-              setAppointments([...appointments, values]);
+              setAppointmentsPlanSaved(true);
             }}
           >
             {(formik) => (
@@ -83,6 +99,10 @@ export default function AppointmentsPlan() {
                     variant="outlined"
                     color="primary"
                     size="medium"
+                    type="datetime-local"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
                   />
 
                   <TextField
@@ -113,19 +133,26 @@ export default function AppointmentsPlan() {
 
                 <div className={styles.addButtonBlock}>
                   <ButtonsBar
-                    handleSave={() => formik.handleSubmit()}
+                    handleSave={() => {
+                    formik.resetForm();
+                      setAppointments([...appointments, formik.values]);
+                    }}
                     saveButtonName="Додати"
-                    disabled={!formik.isValid}
+                    disabled={isAppointmentsPlanSaved}
                   />
                 </div>
 
                 <div className={styles.buttonsBlock}>
                   <ButtonsBar
-                    handleSave={() => console.log('Save')}
-                    handleClose={() => formik.resetForm()}
+                    handleSave={() => formik.handleSubmit()}
+                    handleClose={() => {
+                      formik.resetForm();
+                      setAppointmentsPlanSaved(false);
+                      setAppointments([]);
+                    }}
                     saveButtonName="Зберегти"
                     closeButtonName="Очистити"
-                    disabled={!formik.isValid}
+                    disabled={isAppointmentsPlanSaved}
                   />
                 </div>
               </form>

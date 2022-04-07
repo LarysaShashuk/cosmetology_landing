@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 
 import TextField from '@mui/material/TextField';
@@ -18,19 +18,31 @@ import {
   STATE_AFTER,
 } from '../../../../Common/Constants/IndividualContraindicationsConstants';
 import ButtonsBar from '../../../../Common/ButtonsBar/ButtonsBar';
-import { CheckboxesCustomeTheme } from '../../MuiThemes.js';
+import CustomeAlert from '../../../../Common/CustomeAlert/CustomeAlert';
+import { CheckboxesCustomeTheme, FormBlockCustomeTheme } from '../../MuiThemes.js';
 import styles from './IndividualContraindications.module.scss';
 import { IndividualContraindicationsInitialValues } from './InitialValues';
 
 export default function IndividualContraindications() {
+  const [
+    isIndividualContraindicationsSaved,
+    setIndividualContraindicationsSaved,
+  ] = useState(false);
   return (
+  <ThemeProvider theme={FormBlockCustomeTheme}>
     <div>
+      {isIndividualContraindicationsSaved ? (
+        <CustomeAlert
+          title="Збережено"
+          message="Дані цієї частини форми - успішно збережено."
+        />
+      ) : null}
       <Formik
         initialValues={IndividualContraindicationsInitialValues}
         onSubmit={(values, actions) => {
           actions.setSubmitting(true);
-          // actions.resetForm();
           console.log(values);
+          setIndividualContraindicationsSaved(true);
         }}
       >
         {(formik) => (
@@ -60,6 +72,10 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'cardiovascularDisease.hypertensiveDisease'
                           )}
+                          checked={
+                            formik.values.cardiovascularDisease
+                              .hypertensiveDisease
+                          }
                         />
                       }
                       label={CARDIOVASCULAR_DISEASE.hypertensiveDisease}
@@ -73,6 +89,7 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'cardiovascularDisease.stroke'
                           )}
+                          checked={formik.values.cardiovascularDisease.stroke}
                         />
                       }
                       label={CARDIOVASCULAR_DISEASE.stroke}
@@ -86,6 +103,7 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'cardiovascularDisease.infarct'
                           )}
+                          checked={formik.values.cardiovascularDisease.infarct}
                         />
                       }
                       label={CARDIOVASCULAR_DISEASE.infarct}
@@ -99,6 +117,10 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'cardiovascularDisease.pacemakerPresence'
                           )}
+                          checked={
+                            formik.values.cardiovascularDisease
+                              .pacemakerPresence
+                          }
                         />
                       }
                       label={CARDIOVASCULAR_DISEASE.pacemakerPresence}
@@ -114,6 +136,10 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'cardiovascularDisease.phlebitisPhlebosisThrombosis'
                           )}
+                          checked={
+                            formik.values.cardiovascularDisease
+                              .phlebitisPhlebosisThrombosis
+                          }
                         />
                       }
                       label={
@@ -123,15 +149,6 @@ export default function IndividualContraindications() {
                   </FormGroup>
                 </FormControl>
               </ThemeProvider>
-
-              <TextField
-                id="cardiovascularDisease.comment"
-                {...formik.getFieldProps('cardiovascularDisease.comment')}
-                label={CARDIOVASCULAR_DISEASE.comment}
-                variant="outlined"
-                color="primary"
-                size="small"
-              />
             </div>
 
             <div className={styles.checkboxesWrapper}>
@@ -156,6 +173,10 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'gastrointestinalTractDiseases.liverDisease'
                           )}
+                          checked={
+                            formik.values.gastrointestinalTractDiseases
+                              .liverDisease
+                          }
                         />
                       }
                       label={GASTROINTESTINAL_TRACT_DISEASES.liverDisease}
@@ -171,6 +192,10 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'gastrointestinalTractDiseases.gallbladderDisease'
                           )}
+                          checked={
+                            formik.values.gastrointestinalTractDiseases
+                              .gallbladderDisease
+                          }
                         />
                       }
                       label={GASTROINTESTINAL_TRACT_DISEASES.gallbladderDisease}
@@ -178,17 +203,6 @@ export default function IndividualContraindications() {
                   </FormGroup>
                 </FormControl>
               </ThemeProvider>
-
-              <TextField
-                id="gastrointestinalTractDiseases.comment"
-                {...formik.getFieldProps(
-                  'gastrointestinalTractDiseases.comment'
-                )}
-                label={GASTROINTESTINAL_TRACT_DISEASES.comment}
-                variant="outlined"
-                color="primary"
-                size="small"
-              />
             </div>
 
             <div className={styles.checkboxesWrapper}>
@@ -210,6 +224,7 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'endocrinology.thyroidDisease'
                           )}
+                          checked={formik.values.endocrinology.thyroidDisease}
                         />
                       }
                       label={ENDOCRINOLOGY.thyroidDisease}
@@ -221,6 +236,7 @@ export default function IndividualContraindications() {
                           id="endocrinology.diabetes"
                           name={'endocrinology.diabetes'}
                           {...formik.getFieldProps('endocrinology.diabetes')}
+                          checked={formik.values.endocrinology.diabetes}
                         />
                       }
                       label={ENDOCRINOLOGY.diabetes}
@@ -228,15 +244,6 @@ export default function IndividualContraindications() {
                   </FormGroup>
                 </FormControl>
               </ThemeProvider>
-
-              <TextField
-                id="endocrinology.comment"
-                {...formik.getFieldProps('endocrinology.comment')}
-                label={ENDOCRINOLOGY.comment}
-                variant="outlined"
-                color="primary"
-                size="small"
-              />
             </div>
 
             <div className={styles.checkboxesWrapper}>
@@ -256,6 +263,7 @@ export default function IndividualContraindications() {
                           id="otherConditions.herpes"
                           name={'otherConditions.herpes'}
                           {...formik.getFieldProps('otherConditions.herpes')}
+                          checked={formik.values.otherConditions.herpes}
                         />
                       }
                       label={OTHER_CONDITIONS.herpes}
@@ -267,6 +275,7 @@ export default function IndividualContraindications() {
                           id="otherConditions.OX"
                           name={'otherConditions.OX'}
                           {...formik.getFieldProps('otherConditions.OX')}
+                          checked={formik.values.otherConditions.OX}
                         />
                       }
                       label={OTHER_CONDITIONS.OX}
@@ -277,6 +286,7 @@ export default function IndividualContraindications() {
                           id="otherConditions.hepatitis"
                           name={'otherConditions.hepatitis'}
                           {...formik.getFieldProps('otherConditions.hepatitis')}
+                          checked={formik.values.otherConditions.hepatitis}
                         />
                       }
                       label={OTHER_CONDITIONS.hepatitis}
@@ -289,6 +299,7 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.tuberculosis'
                           )}
+                          checked={formik.values.otherConditions.tuberculosis}
                         />
                       }
                       label={OTHER_CONDITIONS.tuberculosis}
@@ -299,6 +310,7 @@ export default function IndividualContraindications() {
                           id="otherConditions.syphilis"
                           name={'otherConditions.syphilis'}
                           {...formik.getFieldProps('otherConditions.syphilis')}
+                          checked={formik.values.otherConditions.syphilis}
                         />
                       }
                       label={OTHER_CONDITIONS.syphilis}
@@ -309,6 +321,7 @@ export default function IndividualContraindications() {
                           id="otherConditions.epilepsy"
                           name={'otherConditions.epilepsy'}
                           {...formik.getFieldProps('otherConditions.epilepsy')}
+                          checked={formik.values.otherConditions.epilepsy}
                         />
                       }
                       label={OTHER_CONDITIONS.epilepsy}
@@ -319,6 +332,7 @@ export default function IndividualContraindications() {
                           id="otherConditions.oncology"
                           name={'otherConditions.oncology'}
                           {...formik.getFieldProps('otherConditions.oncology')}
+                          checked={formik.values.otherConditions.oncology}
                         />
                       }
                       label={OTHER_CONDITIONS.oncology}
@@ -331,6 +345,7 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.kidneyDisease'
                           )}
+                          checked={formik.values.otherConditions.kidneyDisease}
                         />
                       }
                       label={OTHER_CONDITIONS.kidneyDisease}
@@ -343,6 +358,9 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.edemaPredisposition'
                           )}
+                          checked={
+                            formik.values.otherConditions.edemaPredisposition
+                          }
                         />
                       }
                       label={OTHER_CONDITIONS.edemaPredisposition}
@@ -355,6 +373,9 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.bruisingPredisposition'
                           )}
+                          checked={
+                            formik.values.otherConditions.bruisingPredisposition
+                          }
                         />
                       }
                       label={OTHER_CONDITIONS.bruisingPredisposition}
@@ -366,6 +387,7 @@ export default function IndividualContraindications() {
                           id="otherConditions.asthma"
                           name={'otherConditions.asthma'}
                           {...formik.getFieldProps('otherConditions.asthma')}
+                          checked={formik.values.otherConditions.asthma}
                         />
                       }
                       label={OTHER_CONDITIONS.asthma}
@@ -379,6 +401,9 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.birthControlPills'
                           )}
+                          checked={
+                            formik.values.otherConditions.birthControlPills
+                          }
                         />
                       }
                       label={OTHER_CONDITIONS.birthControlPills}
@@ -389,6 +414,7 @@ export default function IndividualContraindications() {
                           id="otherConditions.neoplasm"
                           name={'otherConditions.neoplasm'}
                           {...formik.getFieldProps('otherConditions.neoplasm')}
+                          checked={formik.values.otherConditions.neoplasm}
                         />
                       }
                       label={OTHER_CONDITIONS.neoplasm}
@@ -401,6 +427,7 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.demodicosis'
                           )}
+                          checked={formik.values.otherConditions.demodicosis}
                         />
                       }
                       label={OTHER_CONDITIONS.demodicosis}
@@ -413,6 +440,10 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.exacerbationOfChronicDiseases'
                           )}
+                          checked={
+                            formik.values.otherConditions
+                              .exacerbationOfChronicDiseases
+                          }
                         />
                       }
                       label={OTHER_CONDITIONS.exacerbationOfChronicDiseases}
@@ -425,6 +456,10 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.increaseBodyTemperature'
                           )}
+                          checked={
+                            formik.values.otherConditions
+                              .increaseBodyTemperature
+                          }
                         />
                       }
                       label={OTHER_CONDITIONS.increaseBodyTemperature}
@@ -435,6 +470,7 @@ export default function IndividualContraindications() {
                           id="otherConditions.psoriasis"
                           name={'otherConditions.psoriasis'}
                           {...formik.getFieldProps('otherConditions.psoriasis')}
+                          checked={formik.values.otherConditions.psoriasis}
                         />
                       }
                       label={OTHER_CONDITIONS.psoriasis}
@@ -447,6 +483,9 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.pregnancyAndLactation'
                           )}
+                          checked={
+                            formik.values.otherConditions.pregnancyAndLactation
+                          }
                         />
                       }
                       label={OTHER_CONDITIONS.pregnancyAndLactation}
@@ -459,6 +498,9 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.beautyInjections'
                           )}
+                          checked={
+                            formik.values.otherConditions.beautyInjections
+                          }
                         />
                       }
                       label={OTHER_CONDITIONS.beautyInjections}
@@ -471,6 +513,7 @@ export default function IndividualContraindications() {
                           {...formik.getFieldProps(
                             'otherConditions.metalImplants'
                           )}
+                          checked={formik.values.otherConditions.metalImplants}
                         />
                       }
                       label={OTHER_CONDITIONS.metalImplants}
@@ -478,15 +521,6 @@ export default function IndividualContraindications() {
                   </FormGroup>
                 </FormControl>
               </ThemeProvider>
-
-              <TextField
-                id="otherConditions.comment"
-                {...formik.getFieldProps('otherConditions.comment')}
-                label={OTHER_CONDITIONS.comment}
-                variant="outlined"
-                color="primary"
-                size="small"
-              />
             </div>
 
             <div className={styles.checkboxesWrapper}>
@@ -504,6 +538,7 @@ export default function IndividualContraindications() {
                           id="stateAfter.operations"
                           name={'stateAfter.operations'}
                           {...formik.getFieldProps('stateAfter.operations')}
+                          checked={formik.values.stateAfter.operations}
                         />
                       }
                       label={STATE_AFTER.operations}
@@ -515,6 +550,7 @@ export default function IndividualContraindications() {
                           id="stateAfter.laserGrinding"
                           name={'stateAfter.laserGrinding'}
                           {...formik.getFieldProps('stateAfter.laserGrinding')}
+                          checked={formik.values.stateAfter.laserGrinding}
                         />
                       }
                       label={STATE_AFTER.laserGrinding}
@@ -526,6 +562,7 @@ export default function IndividualContraindications() {
                           id="stateAfter.deepPeels"
                           name={'stateAfter.deepPeels'}
                           {...formik.getFieldProps('stateAfter.deepPeels')}
+                          checked={formik.values.stateAfter.deepPeels}
                         />
                       }
                       label={STATE_AFTER.deepPeels}
@@ -533,15 +570,6 @@ export default function IndividualContraindications() {
                   </FormGroup>
                 </FormControl>
               </ThemeProvider>
-
-              <TextField
-                id="stateAfter.comment"
-                {...formik.getFieldProps('stateAfter.comment')}
-                label={STATE_AFTER.comment}
-                variant="outlined"
-                color="primary"
-                size="small"
-              />
             </div>
 
             <div className={styles.additionalCommentWrapper}>
@@ -569,15 +597,19 @@ export default function IndividualContraindications() {
             <div className={styles.buttonsBlock}>
               <ButtonsBar
                 handleSave={() => formik.handleSubmit()}
-                handleClose={() => formik.resetForm()}
+                handleClose={() => {
+                  formik.resetForm();
+                  setIndividualContraindicationsSaved(false);
+                }}
                 saveButtonName="Зберегти"
                 closeButtonName="Очистити"
-                disabled={!formik.isValid}
+                disabled={isIndividualContraindicationsSaved}
               />
             </div>
           </form>
         )}
       </Formik>
     </div>
+    </ThemeProvider>
   );
 }

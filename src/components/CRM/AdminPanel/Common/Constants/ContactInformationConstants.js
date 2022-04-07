@@ -7,7 +7,6 @@ export const CONTACT_INFORMATION = {
   email: 'Електронна пошта',
   instagram: 'Instagram',
   facebook: 'Facebook',
-  tags: 'Теги',
   skinType: 'Тип шкіри',
   skinCondition: 'Стан шкіри:',
   allergicReactions: 'Алергічні реакції',
@@ -20,7 +19,6 @@ export const SKIN_TYPE = {
   normal: 'масна',
   fat: 'нормальна',
   combined: 'комбінована',
-  comment: 'коментар',
 };
 
 export const SKIN_CONDITION = {
@@ -37,14 +35,12 @@ export const SKIN_CONDITION = {
   hirsutism: 'гірсутизм',
   bacterialViralSkinDiseases:
     'шкірні захворювання бактеріального та вірусного характеру',
-  comment: 'коментар',
 };
 
 export const ALLERGIC_REACTIONS = {
     food: "продукти харчування",
     medicines: "лікарські препарати",
     cosmetics: "косметичні препарати",
-    comment: 'коментар',
 }
 
 export const MORPHOTYPE = {
@@ -53,5 +49,4 @@ export const MORPHOTYPE = {
     edematousDeforming: "набряково деформуючий",
     mixed: "змішаний",
     muscular: "мускульний",
-    comment: 'коментар',
 }

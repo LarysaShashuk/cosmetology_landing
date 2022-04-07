@@ -1,4 +1,4 @@
-export const CUSTOMER_FACE_MAP = {
+export const CUSTOMERS_FACE_MAP = {
 data: 'Дата',
   upperThird: 'Верхня третина (лоб)',
   middleThird: 'Середня третина (ніс, щоки, вуха)',

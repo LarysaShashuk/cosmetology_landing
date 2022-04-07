@@ -1,4 +1,4 @@
-export const HOME_CARE_RECOMENDATIONS= {
+export const HOME_CARE= {
   cleaning: 'Очищення',
   toning: 'Тонізація',
   basicCare: 'Основний догляд',

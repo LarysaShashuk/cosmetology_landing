@@ -5,17 +5,14 @@ export const IndividualContraindicationsInitialValues = {
     infarct: false,
     pacemakerPresence: false,
     phlebitisPhlebosisThrombosis: false,
-    comment: '',
   },
   gastrointestinalTractDiseases: {
     liverDisease: false,
     gallbladderDisease: false,
-    comment: '',
   },
   endocrinology: {
     thyroidDisease: false,
     diabetes: false,
-    comment: '',
   },
   otherConditions: {
     herpes: false,
@@ -38,14 +35,12 @@ export const IndividualContraindicationsInitialValues = {
     pregnancyAndLactation: false,
     beautyInjections: false,
     metalImplants: false,
-    comment: '',
   },
   lastMedication: '',
   stateAfter: {
     operations: false,
     laserGrinding: false,
     deepPeels: false,
-    comment: '',
   },
   comment: '',
 };

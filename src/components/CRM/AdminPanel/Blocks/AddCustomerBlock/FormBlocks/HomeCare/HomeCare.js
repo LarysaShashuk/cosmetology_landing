@@ -4,30 +4,30 @@ import { Formik } from 'formik';
 import TextField from '@mui/material/TextField';
 import { ThemeProvider } from '@mui/material/styles';
 
-import CustomeAlert from '../../../../Common/CustomeAlert/CustomeAlert';
-import { ADDITIONAL_RECOMENDATIONS } from '../../../../Common/Constants/AdditionalRecommendationsConstants';
+import { HOME_CARE } from '../../../../Common/Constants/HomeCareConstants';
 import ButtonsBar from '../../../../Common/ButtonsBar/ButtonsBar';
+import CustomeAlert from '../../../../Common/CustomeAlert/CustomeAlert';
 import { FormBlockCustomeTheme } from '../../MuiThemes.js';
-import { AdditionalRecommendationsInitialValues } from './InitialValues';
-import styles from './AdditionalRecommendations.module.scss';
+import { HomeCareInitialValues } from './InitialValues';
+import styles from './HomeCare.module.scss';
 
-export default function AdditionalRecommendations() {
-  const [isAdditionalRecommendationsSaved, setAdditionalRecommendationsSaved] =
+export default function HomeCare() {
+  const [isHomeCareSaved, setHomeCareSaved] =
     useState(false);
   return (
     <ThemeProvider theme={FormBlockCustomeTheme}>
       <div>
-        {isAdditionalRecommendationsSaved ? (
+        {isHomeCareSaved ? (
           <CustomeAlert
             title="Збережено"
             message="Дані цієї частини форми - успішно збережено."
           />
         ) : null}
         <Formik
-          initialValues={AdditionalRecommendationsInitialValues}
+          initialValues={HomeCareInitialValues}
           onSubmit={(values, actions) => {
             actions.setSubmitting(true);
-           setAdditionalRecommendationsSaved(true);
+            setHomeCareSaved(true);
             console.log(values);
           }}
         >
@@ -39,45 +39,54 @@ export default function AdditionalRecommendations() {
             >
               <div className={styles.inputsWrapper}>
                 <TextField
-                  id="diet"
-                  {...formik.getFieldProps('diet')}
-                  label={ADDITIONAL_RECOMENDATIONS.diet}
+                  id="cleaning"
+                  {...formik.getFieldProps('cleaning')}
+                  label={HOME_CARE.cleaning}
                   variant="outlined"
                   color="primary"
                   size="medium"
                 />
 
                 <TextField
-                  id="drinkingRegime"
-                  {...formik.getFieldProps('drinkingRegime')}
-                  label={ADDITIONAL_RECOMENDATIONS.drinkingRegime}
+                  id="toning"
+                  {...formik.getFieldProps('toning')}
+                  label={HOME_CARE.toning}
                   variant="outlined"
                   color="primary"
                   size="medium"
                 />
 
                 <TextField
-                  id="medicalConsultation"
-                  {...formik.getFieldProps('medicalConsultation')}
-                  label={ADDITIONAL_RECOMENDATIONS.medicalConsultation}
+                  id="basicCare"
+                  {...formik.getFieldProps('basicCare')}
+                  label={HOME_CARE.basicCare}
                   variant="outlined"
                   color="primary"
                   size="medium"
                 />
 
                 <TextField
-                  id="vitaminsSupplements"
-                  {...formik.getFieldProps('vitaminsSupplements')}
-                  label={ADDITIONAL_RECOMENDATIONS.vitaminsSupplements}
+                  id="dayCare"
+                  {...formik.getFieldProps('dayCare')}
+                  label={HOME_CARE.dayCare}
                   variant="outlined"
                   color="primary"
                   size="medium"
                 />
 
                 <TextField
-                  id="generalRecommendations"
-                  {...formik.getFieldProps('generalRecommendations')}
-                  label={ADDITIONAL_RECOMENDATIONS.generalRecommendations}
+                  id="nightCare"
+                  {...formik.getFieldProps('nightCare')}
+                  label={HOME_CARE.nightCare}
+                  variant="outlined"
+                  color="primary"
+                  size="medium"
+                />
+
+                <TextField
+                  id="intensiveCare"
+                  {...formik.getFieldProps('intensiveCare')}
+                  label={HOME_CARE.intensiveCare}
                   variant="outlined"
                   color="primary"
                   size="medium"
@@ -89,11 +98,11 @@ export default function AdditionalRecommendations() {
                   handleSave={() => formik.handleSubmit()}
                   handleClose={() => {
                     formik.resetForm();
-                    setAdditionalRecommendationsSaved(false);
+                    setHomeCareSaved(false);
                   }}
                   saveButtonName="Зберегти"
                   closeButtonName="Очистити"
-                  disabled={isAdditionalRecommendationsSaved}
+                  disabled={isHomeCareSaved}
                 />
               </div>
             </form>

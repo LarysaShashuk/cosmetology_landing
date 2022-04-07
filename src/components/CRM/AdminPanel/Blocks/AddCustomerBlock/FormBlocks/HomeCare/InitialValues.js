@@ -1,4 +1,4 @@
-export const HomeCareRecommendationsInitialValues = {
+export const HomeCareInitialValues = {
   cleaning: '',
   toning: '',
   basicCare: '',
