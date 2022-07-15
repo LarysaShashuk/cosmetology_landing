@@ -3,7 +3,7 @@ import React from 'react';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
+import { purple, grey } from '@mui/material/colors';
 
 export const AlertCustomeTheme = createTheme({
   palette: {
@@ -11,6 +11,9 @@ export const AlertCustomeTheme = createTheme({
       main: purple[800],
       light: purple[700],
       dark: purple[900],
+    },
+    info: {
+      main: grey[900],
     },
   },
   typography: {
@@ -41,13 +44,13 @@ export const AlertCustomeTheme = createTheme({
 });
 
 export default function CustomeAlert(props) {
-  const { title, message } = props;
+  const { title, message, severity } = props;
   return (
     <ThemeProvider theme={AlertCustomeTheme}>
-      <Alert severity="success">
+      <Alert severity={severity} >
         <AlertTitle>{title}</AlertTitle>
         {message}
       </Alert>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }

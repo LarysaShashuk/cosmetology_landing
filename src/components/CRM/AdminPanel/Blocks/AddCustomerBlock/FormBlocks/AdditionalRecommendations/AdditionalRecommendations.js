@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 import TextField from '@mui/material/TextField';
 import { ThemeProvider } from '@mui/material/styles';
 
+import { additionalRecommendationsAdded } from '../../../../../../../redux/actions/customerActions';
 import CustomeAlert from '../../../../Common/CustomeAlert/CustomeAlert';
 import { ADDITIONAL_RECOMENDATIONS } from '../../../../Common/Constants/AdditionalRecommendationsConstants';
 import ButtonsBar from '../../../../Common/ButtonsBar/ButtonsBar';
@@ -12,23 +15,51 @@ import { AdditionalRecommendationsInitialValues } from './InitialValues';
 import styles from './AdditionalRecommendations.module.scss';
 
 export default function AdditionalRecommendations() {
-  const [isAdditionalRecommendationsSaved, setAdditionalRecommendationsSaved] =
+  let dispatch = useDispatch();
+
+  const [additionalRecommendations, setAdditionalRecommendations] = useState({});
+  const [isAdditionalRecommendationsLocalSaved, setAdditionalRecommendationsLocalSaved] =
     useState(false);
+  const [isAdditionalRecommendationsStoredSaved, setAdditionalRecommendationsStoredSaved] =
+    useState(false);
+
+  const additionalRecommendationsFromState = useSelector((state) => state.customer.additionalRecommendations);
+
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+
+  useEffect(() => {
+    setAdditionalRecommendations({ ...additionalRecommendationsFromState })
+    setAdditionalRecommendationsStoredSaved(!isEmpty(additionalRecommendationsFromState))
+  }, [additionalRecommendationsFromState])
+
+  const handleAdditionalRecommendationsEdit = () => {
+    setAdditionalRecommendationsLocalSaved(false)
+    setAdditionalRecommendationsStoredSaved(false)
+  }
+
+
   return (
     <ThemeProvider theme={FormBlockCustomeTheme}>
       <div>
-        {isAdditionalRecommendationsSaved ? (
+        {isAdditionalRecommendationsLocalSaved || isAdditionalRecommendationsStoredSaved ?
           <CustomeAlert
             title="Збережено"
             message="Дані цієї частини форми - успішно збережено."
+            severity="success"
           />
-        ) : null}
+          : <CustomeAlert
+            title="Не заповнено"
+            message="Ця частина форма не є обов'язковою."
+            severity="info"
+          />}
         <Formik
-          initialValues={AdditionalRecommendationsInitialValues}
+          initialValues={isEmpty(additionalRecommendationsFromState) ? AdditionalRecommendationsInitialValues : additionalRecommendationsFromState}
           onSubmit={(values, actions) => {
-            actions.setSubmitting(true);
-           setAdditionalRecommendationsSaved(true);
-            console.log(values);
+            actions.setSubmitting(false);
+            setAdditionalRecommendationsLocalSaved(true);
+            dispatch(additionalRecommendationsAdded({ ...additionalRecommendations }))
           }}
         >
           {(formik) => (
@@ -45,6 +76,7 @@ export default function AdditionalRecommendations() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isAdditionalRecommendationsLocalSaved || isAdditionalRecommendationsStoredSaved}
                 />
 
                 <TextField
@@ -54,6 +86,7 @@ export default function AdditionalRecommendations() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isAdditionalRecommendationsLocalSaved || isAdditionalRecommendationsStoredSaved}
                 />
 
                 <TextField
@@ -63,6 +96,7 @@ export default function AdditionalRecommendations() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isAdditionalRecommendationsLocalSaved || isAdditionalRecommendationsStoredSaved}
                 />
 
                 <TextField
@@ -72,6 +106,7 @@ export default function AdditionalRecommendations() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isAdditionalRecommendationsLocalSaved || isAdditionalRecommendationsStoredSaved}
                 />
 
                 <TextField
@@ -81,21 +116,37 @@ export default function AdditionalRecommendations() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isAdditionalRecommendationsLocalSaved || isAdditionalRecommendationsStoredSaved}
                 />
               </div>
 
-              <div className={styles.buttonsBlock}>
+              <div>
                 <ButtonsBar
-                  handleSave={() => formik.handleSubmit()}
+                  handleSave={() => {
+                    formik.handleSubmit();
+                    setAdditionalRecommendations(formik.values);
+                  }}
                   handleClose={() => {
                     formik.resetForm();
-                    setAdditionalRecommendationsSaved(false);
+                    setAdditionalRecommendationsLocalSaved(false);
+                    setAdditionalRecommendationsStoredSaved(false);
+                    setAdditionalRecommendations({});
+                    dispatch(additionalRecommendationsAdded({}));
                   }}
                   saveButtonName="Зберегти"
                   closeButtonName="Очистити"
-                  disabled={isAdditionalRecommendationsSaved}
+                  disabled={isAdditionalRecommendationsLocalSaved || isAdditionalRecommendationsStoredSaved}
                 />
               </div>
+
+              {isAdditionalRecommendationsLocalSaved || isAdditionalRecommendationsStoredSaved
+                ? <div className={styles.editButton}>
+                  <ButtonsBar
+                    handleSave={() => handleAdditionalRecommendationsEdit()}
+                    saveButtonName="Редагувати"
+                  />
+                </div> : null
+              }
             </form>
           )}
         </Formik>

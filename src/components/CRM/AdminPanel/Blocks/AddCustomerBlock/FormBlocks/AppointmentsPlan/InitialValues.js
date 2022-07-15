@@ -1,5 +1,5 @@
 export const AppointmentsPlanInitialValues = {
-  data: '',
+  date: '',
   procedure: '',
   comment: '',
   result: '',

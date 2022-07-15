@@ -1,5 +1,5 @@
 export const CUSTOMERS_FACE_MAP = {
-data: 'Дата',
+  date: 'Дата',
   upperThird: 'Верхня третина (лоб)',
   middleThird: 'Середня третина (ніс, щоки, вуха)',
   bottomThird: 'Нижня третина',

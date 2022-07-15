@@ -19,8 +19,8 @@ const ChipsStackCustomeTheme = createTheme({
     fontFamily: 'Montserrat',
   },
   components: {
-    
-     MuiChip: {
+
+    MuiChip: {
       styleOverrides: {
         root: {
           padding: '3px 0',
@@ -48,21 +48,21 @@ export default function ChipsStack(props) {
 
   return (
     <div className={styles.container}>
-    <ThemeProvider theme={ChipsStackCustomeTheme}>
-      <Stack direction="row" spacing={1} className={styles.chipsStack}>
-        {tagsArr.map((item, index) => {
-          return (
-            <Chip
-              key={index}
-              label={item}
-              variant="outlined"
-              onClick={handleClick}
-              onDelete={() => handleDelete(item)}
-              color="primary"
-            />
-          );
-        })}
-      </Stack>
+      <ThemeProvider theme={ChipsStackCustomeTheme}>
+        <Stack direction="row" spacing={1} className={styles.chipsStack}>
+          {tagsArr.map((item, index) => {
+            return (
+              <Chip
+                key={index}
+                label={item}
+                variant="outlined"
+                onClick={handleClick}
+                onDelete={handleDelete ? () => handleDelete(item) : null}
+                color="primary"
+              />
+            );
+          })}
+        </Stack>
       </ThemeProvider>
     </div>
   );

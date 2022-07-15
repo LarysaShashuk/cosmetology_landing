@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 
 import TextField from '@mui/material/TextField';
 import { ThemeProvider } from '@mui/material/styles';
 
+import { homeCareAdded } from '../../../../../../../redux/actions/customerActions';
 import { HOME_CARE } from '../../../../Common/Constants/HomeCareConstants';
 import ButtonsBar from '../../../../Common/ButtonsBar/ButtonsBar';
 import CustomeAlert from '../../../../Common/CustomeAlert/CustomeAlert';
@@ -12,23 +14,51 @@ import { HomeCareInitialValues } from './InitialValues';
 import styles from './HomeCare.module.scss';
 
 export default function HomeCare() {
-  const [isHomeCareSaved, setHomeCareSaved] =
+  let dispatch = useDispatch();
+
+  const [homeCare, setHomeCare] = useState({});
+  const [isHomeCareLocalSaved, setHomeCareLocalSaved] =
     useState(false);
+  const [isHomeCareStoredSaved, setHomeCareStoredSaved] =
+    useState(false);
+
+  const homeCareFromState = useSelector((state) => state.customer.homeCare);
+
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+
+  useEffect(() => {
+    setHomeCare({ ...homeCareFromState })
+    setHomeCareStoredSaved(!isEmpty(homeCareFromState))
+  }, [homeCareFromState])
+
+  const handleHomeCareEdit = () => {
+    setHomeCareLocalSaved(false)
+    setHomeCareStoredSaved(false)
+  }
+
+
   return (
     <ThemeProvider theme={FormBlockCustomeTheme}>
       <div>
-        {isHomeCareSaved ? (
+        {isHomeCareLocalSaved || isHomeCareStoredSaved ?
           <CustomeAlert
             title="Збережено"
             message="Дані цієї частини форми - успішно збережено."
+            severity="success"
           />
-        ) : null}
+          : <CustomeAlert
+            title="Не заповнено"
+            message="Ця частина форма не є обов'язковою."
+            severity="info"
+          />}
         <Formik
-          initialValues={HomeCareInitialValues}
+          initialValues={isEmpty(homeCareFromState) ? HomeCareInitialValues : homeCareFromState}
           onSubmit={(values, actions) => {
-            actions.setSubmitting(true);
-            setHomeCareSaved(true);
-            console.log(values);
+            actions.setSubmitting(false);
+            setHomeCareLocalSaved(true);
+            dispatch(homeCareAdded({ ...homeCare }))
           }}
         >
           {(formik) => (
@@ -45,6 +75,7 @@ export default function HomeCare() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isHomeCareLocalSaved || isHomeCareStoredSaved}
                 />
 
                 <TextField
@@ -54,6 +85,8 @@ export default function HomeCare() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isHomeCareLocalSaved || isHomeCareStoredSaved}
+
                 />
 
                 <TextField
@@ -63,6 +96,8 @@ export default function HomeCare() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isHomeCareLocalSaved || isHomeCareStoredSaved}
+
                 />
 
                 <TextField
@@ -72,6 +107,8 @@ export default function HomeCare() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isHomeCareLocalSaved || isHomeCareStoredSaved}
+
                 />
 
                 <TextField
@@ -81,6 +118,8 @@ export default function HomeCare() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isHomeCareLocalSaved || isHomeCareStoredSaved}
+
                 />
 
                 <TextField
@@ -90,21 +129,38 @@ export default function HomeCare() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isHomeCareLocalSaved || isHomeCareStoredSaved}
+
                 />
               </div>
 
-              <div className={styles.buttonsBlock}>
+              <div>
                 <ButtonsBar
-                  handleSave={() => formik.handleSubmit()}
+                  handleSave={() => {
+                    formik.handleSubmit();
+                    setHomeCare(formik.values);
+                  }}
                   handleClose={() => {
                     formik.resetForm();
-                    setHomeCareSaved(false);
+                    setHomeCareLocalSaved(false);
+                    setHomeCareStoredSaved(false);
+                    setHomeCare({});
+                    dispatch(homeCareAdded({}))
                   }}
                   saveButtonName="Зберегти"
                   closeButtonName="Очистити"
-                  disabled={isHomeCareSaved}
+                  disabled={isHomeCareLocalSaved || isHomeCareStoredSaved}
                 />
               </div>
+
+              {isHomeCareLocalSaved || isHomeCareStoredSaved
+                ? <div className={styles.editButton}>
+                  <ButtonsBar
+                    handleSave={() => handleHomeCareEdit()}
+                    saveButtonName="Редагувати"
+                  />
+                </div> : null
+              }
             </form>
           )}
         </Formik>

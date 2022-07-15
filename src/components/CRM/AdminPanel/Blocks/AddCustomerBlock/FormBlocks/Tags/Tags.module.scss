@@ -1,0 +1,34 @@
+@mixin margin-bottom {
+    margin-bottom: 20px;
+
+    @media (max-width: 740px) {
+        margin-bottom: 10px;
+    }
+}
+
+.tagsWrapper {
+    .newTagInputsWrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+
+        @include margin-bottom;
+    }
+
+    .addButtonBlock {
+        margin-left: 20px;
+    }
+
+    .chipsStack {
+        @include margin-bottom;
+    }
+
+    .editButton {
+        margin-top: 20px;
+
+        @media (max-width: 740px) {
+            margin-top: 10px;
+        }
+    }
+}

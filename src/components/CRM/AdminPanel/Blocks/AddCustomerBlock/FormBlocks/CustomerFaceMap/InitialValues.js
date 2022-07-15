@@ -1,5 +1,5 @@
 export const CustomerFaceMapInitialValues = {
-  data: '',
+  date: '',
   upperThird: {
     wrinkles: false,
     inflammation: false,
@@ -98,3 +98,4 @@ export const CustomerFaceMapInitialValues = {
   },
   comment: '',
 };
+

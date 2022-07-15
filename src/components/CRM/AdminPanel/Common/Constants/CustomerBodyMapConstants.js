@@ -1,18 +1,18 @@
-export const CUSTOMERS_BODY_MAP = {
+export const BODY_PARAMETERS = {
   height: 'Зріст',
   edemaPredisposition: 'Схильність до набряків',
   vascularProblems: 'Судинні проблеми',
   stretchMarks: 'Стриї',
 };
 
-export const CELLULITIS_ZONES = {
-  data: 'Дата',
+export const CELLULITE = {
+  date: 'Дата',
   zone: 'Зона',
   stage: 'Ступінь (від 0 до 4)',
 };
 
-export const PROCEDURES_RESULTS = {
-  data: 'Дата',
+export const RESULTS = {
+  date: 'Дата',
   weight: 'Вага',
   bloodPressure: 'Артеріальний тиск',
   waistCircumference: 'Окружність талії',

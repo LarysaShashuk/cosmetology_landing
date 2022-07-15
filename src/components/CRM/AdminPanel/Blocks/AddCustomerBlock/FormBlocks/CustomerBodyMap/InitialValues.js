@@ -1,4 +1,4 @@
-export const CustomerBodyInitialValues = {
+export const BodyParametersInitialValues = {
   height: '',
   edemaPredisposition: '',
   vascularProblems: '',
@@ -6,13 +6,13 @@ export const CustomerBodyInitialValues = {
 };
 
 export const CelluliteInitialValues = {
-  data: '',
+  date: '',
   zone: '',
   stage: '',
 };
 
-export const AppointmentsPlanInitialValues = {
-  data: '',
+export const ResultsInitialValues = {
+  date: '',
   weight: '',
   bloodPressure: '',
   thighsCircumference: '',

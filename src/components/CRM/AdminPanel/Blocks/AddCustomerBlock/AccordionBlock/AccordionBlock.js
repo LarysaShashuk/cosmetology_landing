@@ -124,10 +124,10 @@ const CustomeMUITheme = createTheme({
 });
 
 export default function AccordionBlock(props) {
-  const { title, children, pending, error, success } = props;
+  const { title, children, status } = props;
   return (
     <ThemeProvider theme={CustomeMUITheme}>
-      {success ? (
+      {status === 'success' ? (
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -159,7 +159,7 @@ export default function AccordionBlock(props) {
         </Accordion>
       ) : null}
 
-      {pending ? (
+      {status === 'pending' ? (
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -185,7 +185,7 @@ export default function AccordionBlock(props) {
         </Accordion>
       ) : null}
 
-      {error ? (
+      {status === 'error' ? (
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}

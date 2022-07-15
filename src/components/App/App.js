@@ -39,24 +39,24 @@ function App() {
 
   return (
     <ThemeProvider theme={CustomeMUITheme}>
-        <Router>
-          <ScrollToTop>
-            <div className={styles.App}>
-              <div>
-                <Header />
-                <Switch>
-                  <Route path="/" exact component={HomeHage} />
-                  <Route
-                    path="/procedures_gallery/:id"
-                    component={ProceduresGalleryPage}
-                  />
-                  <Route path="/procedure/:id" component={ProcedurePage} />
-                  <Route path="/wish/:id" component={WishPage} />
-                  <Route path="/registration" component={RegistrationPage} />
-                  <Route path="/login" component={LoginPage} />
-                  <Route path="/admin" component={AdminPanel} />
+      <Router>
+        <ScrollToTop>
+          <div className={styles.App}>
+            <div>
+              <Header />
+              <Switch>
+                <Route path="/" exact component={HomeHage} />
+                <Route
+                  path="/procedures_gallery/:id"
+                  component={ProceduresGalleryPage}
+                />
+                <Route path="/procedure/:id" component={ProcedurePage} />
+                <Route path="/wish/:id" component={WishPage} />
+                <Route path="/registration" component={RegistrationPage} />
+                <Route path="/login" component={LoginPage} />
+                <Route path="/admin" component={AdminPanel} />
 
-                  {/* <Route path="/admin">
+                {/* <Route path="/admin">
                     {user && userData?.role === 'ADMIN' ? (
                       <AdminPanel />
                     ) : userData?.role !== 'ADMIN' ? (
@@ -66,21 +66,21 @@ function App() {
                     )}
                   </Route> */}
 
-                  <Route exact path="/customer">
-                    {user && userData?.role === 'USER' ? (
-                      <CustomerCabinet />
-                    ) : userData?.role !== 'USER' ? (
-                      <Redirect to="/login" />
-                    ) : (
-                      <Redirect to="/" />
-                    )}
-                  </Route>
-                </Switch>
-              </div>
-              <Footer />
+                <Route exact path="/customer">
+                  {user && userData?.role === 'USER' ? (
+                    <CustomerCabinet />
+                  ) : userData?.role !== 'USER' ? (
+                    <Redirect to="/login" />
+                  ) : (
+                    <Redirect to="/" />
+                  )}
+                </Route>
+              </Switch>
             </div>
-          </ScrollToTop>
-        </Router>
+            <Footer />
+          </div>
+        </ScrollToTop>
+      </Router>
     </ThemeProvider>
   );
 }

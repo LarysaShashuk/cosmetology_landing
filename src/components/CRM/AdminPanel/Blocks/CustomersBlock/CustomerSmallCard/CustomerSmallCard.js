@@ -103,7 +103,7 @@ const CardCustomeTheme = createTheme({
 });
 
 export default function CustomerSmallCard(props) {
-  const { firstName, lastName, fatherName, tags, data, procedure, comment } =
+  const { firstName, lastName, fatherName, tags, date, procedure, comment } =
     props;
 
   const sliceDescription = (text) => {
@@ -142,7 +142,7 @@ export default function CustomerSmallCard(props) {
                   body2: styles.body2,
                 }}
               >
-                <span className={styles.contentSubTitle}>Дата:</span> {data}
+                <span className={styles.contentSubTitle}>Дата:</span> {date}
               </Typography>
               <Typography
                 variant="body2"

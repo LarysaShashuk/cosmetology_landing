@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +21,6 @@ import {
   ALLERGIC_REACTIONS,
   MORPHOTYPE,
 } from '../../../../Common/Constants/ContactInformationConstants';
-import ChipsStack from '../../../../ActionPanel/ChipsStack/ChipsStack';
 import {
   FormBlockCustomeTheme,
   CheckboxesCustomeTheme,
@@ -32,41 +31,59 @@ import { ContactInformationInitialValues } from './InitialValues';
 export default function ContactInformation() {
   let dispatch = useDispatch();
 
-  const [tags, setTags] = useState([]);
   const [contactInformation, setContactInformation] = useState({});
-  const [isContactInformationSaved, setContactInformationSaved] =
+  const [isLocalContactInformationSaved, setLocalContactInformationSaved] =
     useState(false);
-  const [isTagsSaved, setTagsSaved] = useState(false);
+  const [isStoredContactInformationSaved, setStoredContactInformationSaved] =
+    useState(false);
 
-  const handleChipDeleting = (chip) => {
-    setTags(tags.filter((tag) => tag !== chip));
-  };
 
-  const state = useSelector((state) => state.customer);
+  const contactInformationFromState = useSelector((state) => state.customer.contactInformation);
 
-  console.log(state);
+  function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+
+  useEffect(() => {
+    setContactInformation({ ...contactInformationFromState });
+    setStoredContactInformationSaved(!isEmpty(contactInformationFromState));
+  }, [contactInformationFromState])
+
+
+  const handleEdit = () => {
+    setLocalContactInformationSaved(false);
+    setStoredContactInformationSaved(false);
+  }
+
 
   return (
     <ThemeProvider theme={FormBlockCustomeTheme}>
       <div>
-        {isContactInformationSaved ? (
+        {isLocalContactInformationSaved || isStoredContactInformationSaved ? (
           <CustomeAlert
             title="Збережено"
             message="Дані цієї частини форми - успішно збережено."
+            severity="success"
           />
         ) : null}
         <Formik
-          initialValues={ContactInformationInitialValues}
+          initialValues={isEmpty(contactInformationFromState) ? ContactInformationInitialValues : contactInformationFromState}
+          initialTouched={{
+            lastName: true,
+            firstName: true,
+            phone: true,
+          }}
           validationSchema={Yup.object({
-            firstName: Yup.string().required('Це поле є обов`язковим.'),
-            lastName: Yup.string().required('Це поле є обов`язковим.'),
-            phone: Yup.string().required('Це поле є обов`язковим.'),
+            firstName: Yup.string().required("Це поле є обов'язковим."),
+            lastName: Yup.string().required("Це поле є обов'язковим."),
+            phone: Yup.string().required("Це поле є обов'язковим."),
             // .phone(undefined, undefined, 'Номер телефону повин відповідати прикладу: +380111111111.'),
           })}
+          validateOnMount
           onSubmit={(values, actions) => {
             actions.setSubmitting(false);
-            setContactInformationSaved(true);
-            dispatch(contactInformationAdded({ ...contactInformation, tags }));
+            setLocalContactInformationSaved(true);
+            dispatch(contactInformationAdded({ ...contactInformation }));
           }}
         >
           {(formik) => (
@@ -75,6 +92,12 @@ export default function ContactInformation() {
                 e.preventDefault();
               }}
             >
+              {!isEmpty(formik.errors) ?
+                <CustomeAlert
+                  title="Помилка"
+                  message="Заповніть, будь ласка, обов'язкові поля."
+                  severity="error"
+                /> : null}
               <div className={styles.inputsWrapper}>
                 <TextField
                   id="lastName"
@@ -93,6 +116,7 @@ export default function ContactInformation() {
                       ? formik.errors.lastName
                       : null
                   }
+                  disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                 />
                 <TextField
                   id="firstName"
@@ -111,6 +135,7 @@ export default function ContactInformation() {
                       ? formik.errors.firstName
                       : null
                   }
+                  disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                 />
                 <TextField
                   id="fatherName"
@@ -119,6 +144,7 @@ export default function ContactInformation() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                 />
                 <TextField
                   id="phone"
@@ -135,6 +161,7 @@ export default function ContactInformation() {
                       ? formik.errors.phone
                       : null
                   }
+                  disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                 />
                 <TextField
                   id="email"
@@ -143,6 +170,7 @@ export default function ContactInformation() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                 />
                 <TextField
                   id="birthdate"
@@ -155,6 +183,7 @@ export default function ContactInformation() {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                 />
                 <TextField
                   id="instagram"
@@ -163,6 +192,7 @@ export default function ContactInformation() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                 />
                 <TextField
                   id="facebook"
@@ -171,6 +201,7 @@ export default function ContactInformation() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                 />
               </div>
 
@@ -180,6 +211,7 @@ export default function ContactInformation() {
                     sx={{ m: 3 }}
                     component="fieldset"
                     variant="standard"
+                    disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                   >
                     <Chip label="Тип шкіри:" />
                     <FormGroup>
@@ -241,6 +273,7 @@ export default function ContactInformation() {
                     sx={{ m: 3 }}
                     component="fieldset"
                     variant="standard"
+                    disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                   >
                     <Chip label="Стан шкіри:" />
                     <FormGroup>
@@ -413,6 +446,7 @@ export default function ContactInformation() {
                     sx={{ m: 3 }}
                     component="fieldset"
                     variant="standard"
+                    disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                   >
                     <Chip label="Алергічні реакції:" />
                     <FormGroup>
@@ -466,6 +500,7 @@ export default function ContactInformation() {
                     sx={{ m: 3 }}
                     component="fieldset"
                     variant="standard"
+                    disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                   >
                     <Chip label="Морфотип:" />
                     <FormGroup>
@@ -539,7 +574,7 @@ export default function ContactInformation() {
                 </ThemeProvider>
               </div>
 
-              <div className={styles.additionalCommentWrapper}>
+              <div className={styles.inputsWrapper}>
                 <TextField
                   id="comment"
                   {...formik.getFieldProps('comment')}
@@ -547,10 +582,11 @@ export default function ContactInformation() {
                   variant="outlined"
                   color="primary"
                   size="medium"
+                  disabled={isLocalContactInformationSaved || isStoredContactInformationSaved}
                 />
               </div>
 
-              <div className={styles.buttonsBlock}>
+              <div>
                 <ButtonsBar
                   handleSave={() => {
                     formik.handleSubmit();
@@ -558,93 +594,25 @@ export default function ContactInformation() {
                   }}
                   handleClose={() => {
                     formik.resetForm();
-                    setContactInformationSaved(false);
+                    setLocalContactInformationSaved(false);
+                    setStoredContactInformationSaved(false);
                     setContactInformation({});
                     dispatch(
-                      tags?.length
-                        ? contactInformationAdded({ tags })
-                        : contactInformationAdded({})
+                      contactInformationAdded({})
                     );
                   }}
                   saveButtonName="Зберегти"
                   closeButtonName="Очистити"
-                  disabled={!formik.isValid || isContactInformationSaved}
+                  disabled={!formik.isValid || isLocalContactInformationSaved || isStoredContactInformationSaved}
                 />
               </div>
-            </form>
-          )}
-        </Formik>
-      </div>
 
-      <div className={styles.tagsWrapper}>
-        <Chip label="Теги:" />
-        {isTagsSaved ? (
-          <CustomeAlert
-            title="Збережено"
-            message=" Дані цієї частини форми - успішно збережено."
-          />
-        ) : null}
-        {tags?.length ? (
-          <div className={styles.chipsStack}>
-            <ChipsStack tagsArr={tags} handleDelete={handleChipDeleting} />
-          </div>
-        ) : null}
-
-        <Formik
-          initialValues={{ newTag: '' }}
-          onSubmit={(values, actions) => {
-            actions.setSubmitting(true);
-            actions.resetForm();
-            // console.log(values);
-            setTagsSaved(true);
-            dispatch(contactInformationAdded({ ...contactInformation, tags }));
-          }}
-        >
-          {(formikNewTag) => (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <div className={styles.newTagInputsWrapper}>
-                <TextField
-                  id="newTag"
-                  {...formikNewTag.getFieldProps('newTag')}
-                  label="Додати тег"
-                  variant="outlined"
-                  color="primary"
-                  size="medium"
-                  sx={{ width: '70%' }}
-                />
-                <div className={styles.addButtonBlock}>
-                  <ButtonsBar
-                    handleSave={() => {
-                      setTags([...tags, formikNewTag.values.newTag]);
-                      formikNewTag.resetForm();
-                    }}
-                    saveButtonName="Додати"
-                    disabled={isTagsSaved}
-                  />
-                </div>
-              </div>
-              <div className={styles.buttonsBlock}>
+              {isLocalContactInformationSaved || isStoredContactInformationSaved ? <div className={styles.editButton}>
                 <ButtonsBar
-                  handleSave={() => formikNewTag.handleSubmit()}
-                  handleClose={() => {
-                    formikNewTag.resetForm();
-                    setTagsSaved(false);
-                    setTags([]);
-                    dispatch(
-                      contactInformation
-                        ? contactInformationAdded({ ...contactInformation })
-                        : contactInformationAdded({})
-                    );
-                  }}
-                  saveButtonName="Зберегти"
-                  closeButtonName="Очистити"
-                  disabled={isTagsSaved}
+                  handleSave={() => handleEdit()}
+                  saveButtonName="Редагувати"
                 />
-              </div>
+              </div> : null}
             </form>
           )}
         </Formik>

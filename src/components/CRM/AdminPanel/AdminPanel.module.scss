@@ -13,6 +13,10 @@
   width: 95%;
   padding: 10px;
 
+    @media (min-width: 461px) and (max-width: 870px) {
+    width: 90%;
+  }
+
   @media (max-width: 460px) {
     width: 88%;
     padding: 0 0 10px 5px !important;

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,6 +12,7 @@ import Paper from '@mui/material/Paper';
 import TextField from '@mui/material/TextField';
 import { ThemeProvider } from '@mui/material/styles';
 
+import { appointmentsPlanAdded } from '../../../../../../../redux/actions/customerActions';
 import { APPOINTMENTS_PLAN } from '../../../../Common/Constants/AppointmentsPlanConstants';
 import ButtonsBar from '../../../../Common/ButtonsBar/ButtonsBar';
 import CustomeAlert from '../../../../Common/CustomeAlert/CustomeAlert';
@@ -19,8 +21,23 @@ import { AppointmentsPlanInitialValues } from './InitialValues';
 import styles from './AppointmentsPlan.module.scss';
 
 export default function AppointmentsPlan() {
-  const [appointments, setAppointments] = useState([]);
-  const [isAppointmentsPlanSaved, setAppointmentsPlanSaved] = useState(false);
+  let dispatch = useDispatch();
+
+  const [appointmentsPlan, setAppointmentsPlan] = useState([]);
+  const [isLocalAppointmentsPlanSaved, setLocalAppointmentsPlanSaved] = useState(false);
+  const [isStoredAppointmentsPlanSaved, setStoredAppointmentsPlanSaved] = useState(false);
+
+  const appointmentsPlanFromState = useSelector((state) => state.customer.appointmentsPlan);
+
+  useEffect(() => {
+    setAppointmentsPlan([...appointmentsPlanFromState]);
+    setStoredAppointmentsPlanSaved(!!appointmentsPlanFromState[0]);
+  }, [appointmentsPlanFromState])
+
+  const handleEdit = () => {
+    setLocalAppointmentsPlanSaved(false)
+    setStoredAppointmentsPlanSaved(false)
+  }
 
   const showCorrectDateFormat = (string) => {
     return string.replace('T', ', ');
@@ -28,21 +45,26 @@ export default function AppointmentsPlan() {
 
   return (
     <>
-      {isAppointmentsPlanSaved ? (
+      {isLocalAppointmentsPlanSaved || isStoredAppointmentsPlanSaved ? (
         <CustomeAlert
           title="Збережено"
-          message="Дані цієї частини форми - успішно збережено."
+          message=" Дані цієї частини форми - успішно збережено."
+          severity="success"
         />
-      ) : null}
+      ) : <CustomeAlert
+        title="Не заповнено"
+        message="Ця частина форма не є обов'язковою."
+        severity="info"
+      />}
 
-      {appointments.length ? (
+      {appointmentsPlan?.length ? (
         <ThemeProvider theme={TableCustomeTheme}>
           <div className={styles.tableWrapper}>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>{APPOINTMENTS_PLAN.data}</TableCell>
+                    <TableCell>{APPOINTMENTS_PLAN.date}</TableCell>
                     <TableCell align="right">
                       {APPOINTMENTS_PLAN.procedure}
                     </TableCell>
@@ -55,10 +77,10 @@ export default function AppointmentsPlan() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {appointments.map((appointment, index) => (
+                  {appointmentsPlan.map((appointment, index) => (
                     <TableRow key={index}>
                       <TableCell component="th" scope="row">
-                        {showCorrectDateFormat(appointment.data)}
+                        {showCorrectDateFormat(appointment.date)}
                       </TableCell>
                       <TableCell align="right">
                         {appointment.procedure}
@@ -79,10 +101,10 @@ export default function AppointmentsPlan() {
           <Formik
             initialValues={AppointmentsPlanInitialValues}
             onSubmit={(values, actions) => {
-              actions.setSubmitting(true);
+              actions.setSubmitting(false);
               actions.resetForm();
-              console.log(values);
-              setAppointmentsPlanSaved(true);
+              setLocalAppointmentsPlanSaved(true);
+              dispatch(appointmentsPlanAdded(appointmentsPlan));
             }}
           >
             {(formik) => (
@@ -93,9 +115,9 @@ export default function AppointmentsPlan() {
               >
                 <div className={styles.inputsWrapper}>
                   <TextField
-                    id="data"
-                    {...formik.getFieldProps('data')}
-                    label={APPOINTMENTS_PLAN.data}
+                    id="date"
+                    {...formik.getFieldProps('date')}
+                    label={APPOINTMENTS_PLAN.date}
                     variant="outlined"
                     color="primary"
                     size="medium"
@@ -103,6 +125,7 @@ export default function AppointmentsPlan() {
                     InputLabelProps={{
                       shrink: true,
                     }}
+                    disabled={isLocalAppointmentsPlanSaved || isStoredAppointmentsPlanSaved}
                   />
 
                   <TextField
@@ -112,6 +135,7 @@ export default function AppointmentsPlan() {
                     variant="outlined"
                     color="primary"
                     size="medium"
+                    disabled={isLocalAppointmentsPlanSaved || isStoredAppointmentsPlanSaved}
                   />
                   <TextField
                     id="comment"
@@ -120,6 +144,7 @@ export default function AppointmentsPlan() {
                     variant="outlined"
                     color="primary"
                     size="medium"
+                    disabled={isLocalAppointmentsPlanSaved || isStoredAppointmentsPlanSaved}
                   />
                   <TextField
                     id="result"
@@ -128,33 +153,43 @@ export default function AppointmentsPlan() {
                     variant="outlined"
                     color="primary"
                     size="medium"
+                    disabled={isLocalAppointmentsPlanSaved || isStoredAppointmentsPlanSaved}
                   />
                 </div>
 
                 <div className={styles.addButtonBlock}>
                   <ButtonsBar
                     handleSave={() => {
-                    formik.resetForm();
-                      setAppointments([...appointments, formik.values]);
+                      formik.resetForm();
+                      setAppointmentsPlan([...appointmentsPlan, formik.values]);
                     }}
                     saveButtonName="Додати"
-                    disabled={isAppointmentsPlanSaved}
+                    disabled={isLocalAppointmentsPlanSaved || isStoredAppointmentsPlanSaved}
                   />
                 </div>
 
-                <div className={styles.buttonsBlock}>
+                <div >
                   <ButtonsBar
                     handleSave={() => formik.handleSubmit()}
                     handleClose={() => {
                       formik.resetForm();
-                      setAppointmentsPlanSaved(false);
-                      setAppointments([]);
+                      setLocalAppointmentsPlanSaved(false);
+                      setAppointmentsPlan([]);
+                      dispatch(appointmentsPlanAdded([]));
                     }}
                     saveButtonName="Зберегти"
                     closeButtonName="Очистити"
-                    disabled={isAppointmentsPlanSaved}
+                    disabled={isLocalAppointmentsPlanSaved || isStoredAppointmentsPlanSaved || !appointmentsPlan[0]}
                   />
                 </div>
+
+                {isLocalAppointmentsPlanSaved || isStoredAppointmentsPlanSaved ? <div className={styles.editButton}>
+                  <ButtonsBar
+                    handleSave={() => handleEdit()}
+                    saveButtonName="Редагувати"
+                  />
+                </div> : null}
+
               </form>
             )}
           </Formik>

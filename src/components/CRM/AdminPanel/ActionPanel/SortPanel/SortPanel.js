@@ -88,7 +88,7 @@ export default function SortPanel() {
           color="primary"
           type="submit"
           className={styles.closeButton}
-          //   onClick={() => handleClose()}
+        //   onClick={() => handleClose()}
         >
           Закрити
         </Button>

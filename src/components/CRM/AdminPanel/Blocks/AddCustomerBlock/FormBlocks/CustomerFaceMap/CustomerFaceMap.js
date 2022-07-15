@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -16,6 +17,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
+import { customerFaceMapAdded } from '../../../../../../../redux/actions/customerActions';
 import {
   CUSTOMERS_FACE_MAP,
   FACE_MARKERS,
@@ -31,24 +33,46 @@ import { CustomerFaceMapInitialValues } from './InitialValues';
 import styles from './CustomerFaceMap.module.scss';
 
 export default function CustomerFaceMap() {
-  const [customerFaceData, setCustomerFaceData] = useState([]);
-  const [isCustomerFaceMapSaved, setCustomerFaceMapSaved] = useState(false);
+  let dispatch = useDispatch();
+
+  const [customerFaceMap, setCustomerFaceMap] = useState([]);
+  const [isLocalCustomerFaceMapSaved, setLocalCustomerFaceMapSaved] = useState(false);
+  const [isStoredCustomerFaceMapSaved, setStoredCustomerFaceMapSaved] =
+    useState(false);
+
+  const customerFaceMapFromState = useSelector((state) => state.customer.customerFaceMap);
+
+  useEffect(() => {
+    setCustomerFaceMap([...customerFaceMapFromState]);
+    setStoredCustomerFaceMapSaved(!!customerFaceMapFromState[0]);
+  }, [customerFaceMapFromState])
+
+  const handleEdit = () => {
+    setLocalCustomerFaceMapSaved(false)
+    setStoredCustomerFaceMapSaved(false)
+  }
+
   return (
     <>
-      {isCustomerFaceMapSaved ? (
+      {isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved ? (
         <CustomeAlert
           title="Збережено"
-          message="Дані цієї частини форми - успішно збережено."
+          message=" Дані цієї частини форми - успішно збережено."
+          severity="success"
         />
-      ) : null}
-      {customerFaceData.length ? (
+      ) : <CustomeAlert
+        title="Не заповнено"
+        message="Ця частина форма не є обов'язковою."
+        severity="info"
+      />}
+      {customerFaceMap?.length ? (
         <ThemeProvider theme={TableCustomeTheme}>
           <div className={styles.tableWrapper}>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>{CUSTOMERS_FACE_MAP.data}</TableCell>
+                    <TableCell>{CUSTOMERS_FACE_MAP.date}</TableCell>
                     <TableCell align="right">
                       {CUSTOMERS_FACE_MAP.upperThird}
                     </TableCell>
@@ -70,7 +94,8 @@ export default function CustomerFaceMap() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {customerFaceData.map((appointment, index) => {
+                  {customerFaceMap.map((appointment, index) => {
+
                     const mapAppointmentObject = (obj) => {
                       const ArrayOfValues = [];
                       for (let key in obj) {
@@ -78,35 +103,45 @@ export default function CustomerFaceMap() {
                           ArrayOfValues.push(FACE_MARKERS[key]);
                         }
                       }
-                      return ArrayOfValues.map((item, index) => (
-                        <div key={index}>{item}</div>
+                      return ArrayOfValues.map((item, itemIndex) => (
+                        <div key={itemIndex}>{item}</div>
                       ));
                     };
 
                     return (
-                      <TableRow key={index}>
-                        <TableCell component="th" scope="row">
-                          {appointment.data}
-                        </TableCell>
-                        <TableCell align="right">
-                          {mapAppointmentObject(appointment.upperThird)}
-                        </TableCell>
-                        <TableCell align="right">
-                          {mapAppointmentObject(appointment.middleThird)}
-                        </TableCell>
-                        <TableCell align="right">
-                          {mapAppointmentObject(appointment.bottomThird)}
-                        </TableCell>
-                        <TableCell align="right">
-                          {mapAppointmentObject(appointment.neck)}
-                        </TableCell>
-                        <TableCell align="right">
-                          {mapAppointmentObject(appointment.neckline)}
-                        </TableCell>
-                        <TableCell align="right">
-                          {mapAppointmentObject(appointment.tZone)}
-                        </TableCell>
-                      </TableRow>
+                      <React.Fragment key={index}>
+                        <TableRow>
+                          <TableCell component="th" scope="row">
+                            {appointment.date}
+                          </TableCell>
+                          <TableCell align="right">
+                            {mapAppointmentObject(appointment.upperThird)}
+                          </TableCell>
+                          <TableCell align="right">
+                            {mapAppointmentObject(appointment.middleThird)}
+                          </TableCell>
+                          <TableCell align="right">
+                            {mapAppointmentObject(appointment.bottomThird)}
+                          </TableCell>
+                          <TableCell align="right">
+                            {mapAppointmentObject(appointment.neck)}
+                          </TableCell>
+                          <TableCell align="right">
+                            {mapAppointmentObject(appointment.neckline)}
+                          </TableCell>
+                          <TableCell align="right">
+                            {mapAppointmentObject(appointment.tZone)}
+                          </TableCell>
+                        </TableRow>
+                        {appointment.comment ? <TableRow >
+                          <TableCell component="th" scope="row">
+                            {CUSTOMERS_FACE_MAP.comment}
+                          </TableCell>
+                          <TableCell align="right" colSpan={6}>
+                            {appointment.comment}
+                          </TableCell>
+                        </TableRow> : null}
+                      </React.Fragment>
                     );
                   })}
                 </TableBody>
@@ -121,10 +156,10 @@ export default function CustomerFaceMap() {
           <Formik
             initialValues={CustomerFaceMapInitialValues}
             onSubmit={(values, actions) => {
-              actions.setSubmitting(true);
+              actions.setSubmitting(false);
               actions.resetForm();
-              console.log(values);
-              setCustomerFaceMapSaved(true);
+              setLocalCustomerFaceMapSaved(true);
+              dispatch(customerFaceMapAdded(customerFaceMap));
             }}
           >
             {(formik) => (
@@ -135,16 +170,16 @@ export default function CustomerFaceMap() {
               >
                 <div className={styles.inputsWrapper}>
                   <TextField
-                    id="data"
-                    {...formik.getFieldProps('data')}
-                    label={CUSTOMERS_FACE_MAP.data}
+                    id="date"
+                    {...formik.getFieldProps('date')}
+                    label={CUSTOMERS_FACE_MAP.date}
                     variant="outlined"
-                    color="primary"
                     size="medium"
                     type="date"
                     InputLabelProps={{
                       shrink: true,
                     }}
+                    disabled={isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved}
                   />
                 </div>
 
@@ -154,6 +189,7 @@ export default function CustomerFaceMap() {
                       sx={{ m: 3 }}
                       component="fieldset"
                       variant="standard"
+                      disabled={isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved}
                     >
                       <Chip label={CUSTOMERS_FACE_MAP.upperThird + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
@@ -332,6 +368,7 @@ export default function CustomerFaceMap() {
                       sx={{ m: 3 }}
                       component="fieldset"
                       variant="standard"
+                      disabled={isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved}
                     >
                       <Chip label={CUSTOMERS_FACE_MAP.middleThird + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
@@ -510,6 +547,7 @@ export default function CustomerFaceMap() {
                       sx={{ m: 3 }}
                       component="fieldset"
                       variant="standard"
+                      disabled={isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved}
                     >
                       <Chip label={CUSTOMERS_FACE_MAP.bottomThird + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
@@ -688,6 +726,7 @@ export default function CustomerFaceMap() {
                       sx={{ m: 3 }}
                       component="fieldset"
                       variant="standard"
+                      disabled={isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved}
                     >
                       <Chip label={CUSTOMERS_FACE_MAP.neck + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
@@ -862,6 +901,7 @@ export default function CustomerFaceMap() {
                       sx={{ m: 3 }}
                       component="fieldset"
                       variant="standard"
+                      disabled={isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved}
                     >
                       <Chip label={CUSTOMERS_FACE_MAP.neckline + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
@@ -1036,6 +1076,7 @@ export default function CustomerFaceMap() {
                       sx={{ m: 3 }}
                       component="fieldset"
                       variant="standard"
+                      disabled={isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved}
                     >
                       <Chip label={CUSTOMERS_FACE_MAP.tZone + ':'} />
                       <FormGroup className={styles.innerCheckboxesWrapper}>
@@ -1212,32 +1253,41 @@ export default function CustomerFaceMap() {
                     variant="outlined"
                     color="primary"
                     size="medium"
+                    disabled={isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved}
                   />
                 </div>
                 <div className={styles.addButtonBlock}>
                   <ButtonsBar
                     handleSave={() => {
-                    formik.resetForm();
-                      setCustomerFaceData([...customerFaceData, formik.values]);
+                      formik.resetForm();
+                      setCustomerFaceMap([...customerFaceMap, formik.values]);
                     }}
                     saveButtonName="Додати"
-                    disabled={isCustomerFaceMapSaved}
+                    disabled={isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved}
                   />
                 </div>
 
-                <div className={styles.buttonsBlock}>
+                <div>
                   <ButtonsBar
                     handleSave={() => formik.handleSubmit()}
                     handleClose={() => {
                       formik.resetForm();
-                      setCustomerFaceMapSaved(false);
-                      setCustomerFaceData([]);
+                      setLocalCustomerFaceMapSaved(false);
+                      setCustomerFaceMap([]);
+                      dispatch(customerFaceMapAdded([]))
                     }}
                     saveButtonName="Зберегти"
                     closeButtonName="Очистити"
-                    disabled={isCustomerFaceMapSaved}
+                    disabled={isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved || !customerFaceMap[0]}
                   />
                 </div>
+
+                {isLocalCustomerFaceMapSaved || isStoredCustomerFaceMapSaved ? <div className={styles.editButton}>
+                  <ButtonsBar
+                    handleSave={() => handleEdit()}
+                    saveButtonName="Редагувати"
+                  />
+                </div> : null}
               </form>
             )}
           </Formik>
