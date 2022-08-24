@@ -110,7 +110,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 150 грн',
+            text: 'від 250 грн',
           },
         ],
       },
