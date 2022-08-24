@@ -186,7 +186,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: '50 грн',
+            text: '90 грн',
           },
         ],
       },
@@ -372,7 +372,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: '100 грн',
+            text: '150 грн',
           },
         ],
       },
@@ -597,7 +597,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 250 грн',
+            text: 'від 400 грн',
           },
         ],
       },
@@ -670,7 +670,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 150 грн',
+            text: 'від 400 грн',
           },
         ],
       },
@@ -762,7 +762,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 150 грн',
+            text: 'від 170 грн',
           },
         ],
       },
@@ -881,7 +881,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 500 грн',
+            text: 'від 800 грн',
           },
         ],
       },
@@ -1053,7 +1053,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: '150 грн',
+            text: '200 грн',
           },
         ],
       },
@@ -1179,7 +1179,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 150 грн',
+            text: 'від 200 грн',
           },
         ],
       },
@@ -1397,7 +1397,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 500 грн',
+            text: 'від 700 грн',
           },
         ],
       },
@@ -1489,7 +1489,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: '150 грн',
+            text: '200 грн',
           },
         ],
       },
@@ -1625,7 +1625,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: '150 грн',
+            text: '200 грн',
           },
         ],
       },
@@ -1713,7 +1713,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: '150 грн',
+            text: '170 грн',
           },
         ],
       },
@@ -1961,7 +1961,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: '50 грн',
+            text: '90 грн',
           },
         ],
       },
@@ -2143,7 +2143,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: '100 грн',
+            text: '150 грн',
           },
         ],
       },
@@ -2215,7 +2215,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 150 грн',
+            text: 'від 400 грн',
           },
         ],
       },
@@ -2299,7 +2299,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 150 грн',
+            text: 'від 170 грн',
           },
         ],
       },
@@ -2410,7 +2410,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 500 грн',
+            text: 'від 800 грн',
           },
         ],
       },
@@ -2491,7 +2491,7 @@ const PROCEDURES_DETAILED_INFORMATION = [
         content: [
           {
             id: '1',
-            text: 'від 150 грн',
+            text: 'від 200 грн',
           },
         ],
       },
