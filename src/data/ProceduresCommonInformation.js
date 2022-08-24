@@ -15,7 +15,7 @@ const PROCEDURES_COMMON_INFORMATION = [
         id: 'cosmetic_facial_massage',
         title: 'Косметичний масаж',
         img: '/assets/images/face_procedures/face_procedure_1.jpg',
-        price: 'від 150 грн',
+        price: 'від 250 грн',
       },
       {
         id: 'darsonvalization',
