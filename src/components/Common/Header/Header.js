@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import CONTACT_INFORMATION from '../../../data/ContactInformation';
 import styles from './Header.module.scss';
+import Instagram from '../IconsSVG/Instagram';
 
 export default function Header() {
   const { address, googleMaps, phoneNumber } = CONTACT_INFORMATION;
@@ -24,9 +25,12 @@ export default function Header() {
         >
           {address.city} {address.street}
         </a>
-        <a href={`tel:${phoneNumber}`} className={styles.phone}>
+        <a href={`tel:${phoneNumber}`} className={styles.address}>
           {phoneNumber}
         </a>
+          <a href={socialNetworks[0].link} className={styles.phone}>
+             Instagram
+          </a>
       </div>
       <div className={styles.line}></div>
     </div>
