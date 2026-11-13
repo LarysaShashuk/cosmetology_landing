@@ -1,7 +1,7 @@
 const CONTACT_INFORMATION = {
   address: {
     city: 'м.Рівне',
-    street: 'вул. В. Чорновола 17а',
+    street: 'вул. Кавказька 32б, ЖК Соуренж'
   },
   googleMaps: 'https://goo.gl/maps/ZXJNeuACYP1NENoaA',
   phoneNumber: '+38 (067) 492 84 83',

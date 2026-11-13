@@ -5,7 +5,7 @@ import CONTACT_INFORMATION from '../../../data/ContactInformation';
 import styles from './Header.module.scss';
 
 export default function Header() {
-  const { address, googleMaps, phoneNumber } = CONTACT_INFORMATION;
+  const { address, googleMaps, phoneNumber, socialNetworks } = CONTACT_INFORMATION;
 
   return (
     <div className={styles.container}>
@@ -22,11 +22,20 @@ export default function Header() {
           className={styles.address}
           rel="noreferrer"
         >
-          {address.city} {address.street}
+          <span>
+          {address.city}
+          </span>
+        <span>
+          {address.street}
+        </span>
         </a>
         <a href={`tel:${phoneNumber}`} className={styles.phone}>
           {phoneNumber}
         </a>
+          <a href={socialNetworks[0].link} className={styles.instagram}>
+             Instagram
+          </a>
+
       </div>
       <div className={styles.line}></div>
     </div>
